@@ -16,6 +16,10 @@ module.exports = db.define('Users',{
         type: Sequelize.STRING(254),
         allowNull:false
     },
+    Email:{
+        type: Sequelize.STRING(254),
+        allowNull: false
+    },
     Admin:{
         type : Sequelize.BOOLEAN,
         allowNull: false,
