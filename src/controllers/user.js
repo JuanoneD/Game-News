@@ -6,7 +6,7 @@ module.exports = {
         let data = req.body;
         await users.create({
             Name: data.Name,
-            Password: createHash('sha256').update(data.Password),
+            Password: createHash('sha256').update(data.Password).digest('hex'),
             Email: data.Email,
             Admin: data.Admin
         })
@@ -15,7 +15,12 @@ module.exports = {
     async loginUser(req,res){
         let data = req.body;
 
-        let login = await users.findOne({where: {Email:data.Password} });
+        let login = await users.findOne({
+            raw: true,
+            attributes:['IDUser','Name','Password','Email','Admin'],
+            where: {Email:data.Email} 
+        });
+
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
             res.redirect(`/${login.IDUser}`);
             return;

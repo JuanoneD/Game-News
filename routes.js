@@ -6,4 +6,5 @@ const user = require('./src/controllers/user')
 
 route.get('/', home.pagInicialGet);
 route.post('/', user.registerUser);
+route.post('/login',user.loginUser);
 module.exports = route;
