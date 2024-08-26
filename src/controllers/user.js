@@ -15,7 +15,7 @@ module.exports = {
     },
     async UpdateUser(req,res){
         let data = req.body;
-        let id = req.params.id;
+        let id = req.query.id;
 
         await users.update({
             Name: data.Name,
