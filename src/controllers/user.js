@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const users = require('../model/user');
 const { createHash } = require('crypto');
 
@@ -11,6 +12,17 @@ module.exports = {
             Admin: data.Admin
         })
         res.redirect('/');
+    },
+    async UpdateUser(req,res){
+        let data = req.body;
+        let id = req.params.id;
+
+        await users.update({
+            Name: data.Name,
+            Password: createHash('sha256').update(data.Password).digest('hex'),
+            Email: data.Email,
+            Admin: data.Admin
+        },{where:{IDUser:id}});
     },
     async loginUser(req,res){
         let data = req.body;
