@@ -1,3 +1,4 @@
+const articles = require('../model/article');
 const users = require('../model/user');
 
 module.exports = {

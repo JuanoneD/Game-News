@@ -13,12 +13,13 @@ module.exports = db.define('Users',{
         allowNull: false,
     },
     Password:{
-        type: Sequelize.STRING(254),
+        type: Sequelize.STRING(256),
         allowNull:false
     },
     Email:{
         type: Sequelize.STRING(254),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     Admin:{
         type : Sequelize.BOOLEAN,
