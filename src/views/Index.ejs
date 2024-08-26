@@ -7,13 +7,7 @@
 </head>
 <body>
     <h1>Boa noite!!!</h1>
-    <%
-        if(loginError)
-        {
-            alert("Login fracassou com êxito");
-        }
-    %>
-    <form method="post">
+    <form method="post" action="/">
         nome:
         <input type="text" name="Name">
         senha:
@@ -31,5 +25,11 @@
         <input type="submit">
     </form>
 
+
+    <%if(loginfail){ %>
+        <script>
+            alert("Login fracassou com êxito");
+        </script>
+    <%}%>
 </body>
 </html>

@@ -3,6 +3,6 @@ module.exports =
     async LoginError(req,res)
     {
 
-        res.redirect('/', {loginfail: true});
+        res.render('../views/index', {loginfail: true});
     }
 }

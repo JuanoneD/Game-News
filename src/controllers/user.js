@@ -21,6 +21,11 @@ module.exports = {
             where: {Email:data.Email} 
         });
 
+        if(!login){
+            res.redirect('/loginError');
+            return;
+        }
+
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
             res.redirect('/',);
             return;
