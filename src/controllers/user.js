@@ -22,7 +22,7 @@ module.exports = {
         });
 
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.redirect(`/${login.IDUser}`);
+            res.redirect('/',);
             return;
         }
         res.redirect('/loginError');
