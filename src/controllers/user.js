@@ -22,14 +22,14 @@ module.exports = {
         });
 
         if(!login){
-            res.redirect('/loginError');
+            res.redirect('/loginError/?error=login');
             return;
         }
 
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.redirect('/',{user: login});
+            res.redirect('/?id=' + encodeURIComponent(login.IDUser));
             return;
         }
-        res.redirect('/loginError');
+        res.redirect('/loginError/?error=password');
     }
 };
