@@ -27,7 +27,7 @@ module.exports = {
         }
 
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.redirect('/',);
+            res.redirect('/',{user: login});
             return;
         }
         res.redirect('/loginError');
