@@ -15,7 +15,8 @@ module.exports = {
     },
     async UpdateUser(req,res){
         let data = req.body;
-        let id = req.query.id;
+        let id_user = await functions.getUserId(req,res);
+        if(!id_user){return;}
 
         await users.update({
             Name: data.Name,
