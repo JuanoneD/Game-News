@@ -26,21 +26,22 @@ module.exports = {
             }
         );
 
-        if(createHash('sha256').update(data.Password1).digest('hex') != OldPassword)
+        if(OldPassword.Password != createHash('sha256').update(data.Password).digest('hex'))
         {
-            res.render('../views/Update.ejs', {error: 'WrongPassword'});
+            console.log(createHash('sha256').update(data.Password).digest('hex'));
+            res.render('../views/Update', {error: 'WrongPassword', id: id_user});
             return;
         }
 
-        if(Password2 != Password3)
+        if(data.PasswordNew1 != data.PasswordNew2)
         {
-            res.render('../views/Update.ejs', {error: 'RepeatMismatch'});
+            res.render('../views/Update', {error: 'RepeatMismatch', id: id_user});
             return;
         }
 
         await users.update({
             Name: data.Name,
-            Password: createHash('sha256').update(data.Password2).digest('hex'),
+            Password: createHash('sha256').update(data.PasswordNew1).digest('hex'),
             Email: data.Email,
             Admin: data.Admin
         },{where:{IDUser:id_user}});

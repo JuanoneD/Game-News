@@ -7,17 +7,25 @@
 </head>
 <body>
     <h1>Boa noite!!!</h1>
+    <% if(error) {
+        if(error == 'WrongPassword') { %>
+            <h4>A senha está errada</h4>
+        <% }else if(error == 'RepeatMismatch') { %>
+            <h4>A senhas novas estão diferentes</h4>
+        <% } 
+    } %>
+
     <form method="post" action="/Update/<%=id%>">
         nome:
-        <input type="text" name="Name" value="<%= User.Nome %>">
+        <input type="text" name="Name">
         email:
-        <input type="text" name = "Email" value="<%= User.Email %>">
+        <input type="text" name = "Email">
         senha antiga:
-        <input type="password" name="Password1">
+        <input type="password" name="Password">
         senha nova:
-        <input type="password" name="Password2">
+        <input type="password" name="PasswordNew1">
         repita a senha nova:
-        <input type="password" name="Password3">
+        <input type="password" name="PasswordNew2">
         <input type="submit">
     </form>
 </body>

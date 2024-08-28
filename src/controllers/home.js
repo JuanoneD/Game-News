@@ -9,6 +9,6 @@ module.exports = {
         let id = req.params.id
         if(!id) return;
 
-        res.render('../views/Update',{id});
+        res.render('../views/Update',{id, error: ''});
     }
 }
