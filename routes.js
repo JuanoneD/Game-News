@@ -13,5 +13,4 @@ route.get('/LogOut',user.logout);
 route.post('/Update/:id',user.UpdateUser);
 route.get('/Update/:id',render.pagUpdate);
 
-route.get('/loginError',errors.LoginError);
 module.exports = route;
