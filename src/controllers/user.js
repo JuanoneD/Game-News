@@ -18,9 +18,30 @@ module.exports = {
         let id_user = await functions.getUserId(req,res);
         if(!id_user){return;}
 
+        OldPassword = await users.findByPk
+        (
+            id_user, 
+            {
+                raw: true,
+                attributes: ['Password']
+            }
+        );
+
+        if(createHash('sha256').update(data.Password1).digest('hex') != OldPassword)
+        {
+            res.render('../views/Update.ejs', {error: 'WrongPassword'});
+            return;
+        }
+
+        if(Password2 != Password3)
+        {
+            res.render('../views/Update.ejs', {error: 'RepeatMismatch'});
+            return;
+        }
+
         await users.update({
             Name: data.Name,
-            Password: createHash('sha256').update(data.Password).digest('hex'),
+            Password: createHash('sha256').update(data.Password2).digest('hex'),
             Email: data.Email,
             Admin: data.Admin
         },{where:{IDUser:id}});

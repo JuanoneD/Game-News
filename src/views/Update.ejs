@@ -9,11 +9,15 @@
     <h1>Boa noite!!!</h1>
     <form method="post" action="/Update">
         nome:
-        <input type="text" name="Name">
-        senha:
-        <input type="password" name="Password">
+        <input type="text" name="Name" value="<%= User.Nome %>">
         email:
-        <input type="text" name = "Email">
+        <input type="text" name = "Email" value="<%= User.Email %>">
+        senha antiga:
+        <input type="password" name="Password1">
+        senha nova:
+        <input type="password" name="Password2">
+        repita a senha nova:
+        <input type="password" name="Password3">
         <input type="submit">
     </form>
 </body>

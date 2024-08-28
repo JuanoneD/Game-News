@@ -26,10 +26,19 @@
     </form>
 
 
-    <%if(loginfail){ %>
+    <%if(loginfail){ 
+        if(error == 'login')
+        {
+        %>
         <script>
-            alert("Login fracassou com êxito");
+            alert("Login Errado");
         </script>
-    <%}%>
+        <% }else 
+        { %>
+        <script>
+            alert("Senha Errada");
+        </script>
+        <% }
+    } %>
 </body>
 </html>
