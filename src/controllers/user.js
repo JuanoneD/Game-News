@@ -28,13 +28,13 @@ module.exports = {
 
         if(createHash('sha256').update(data.Password1).digest('hex') != OldPassword)
         {
-            res.render('../views/Update.ejs', {error: 'WrongPassword'});
+            res.render('../views/Update', {error: 'WrongPassword'});
             return;
         }
 
         if(Password2 != Password3)
         {
-            res.render('../views/Update.ejs', {error: 'RepeatMismatch'});
+            res.render('../views/Update', {error: 'RepeatMismatch'});
             return;
         }
 
