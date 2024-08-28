@@ -19,6 +19,7 @@ module.exports = {
     async updateArticle(req,res){
         let id_user = req.params.id;
         let id_article = req.params.idArticle;
+        let data =  req.body;
 
         let article= await articles.findByPk(id_article,{
             raw:true,
