@@ -28,21 +28,13 @@
     <%if(login){%>
         <a href="/Update/<%=login.IDUser%>">Editar user</a>
         <a href="/Logout">Deslogar</a>
+        <a href="/WriteArticle/<%=login.IDUser%>">Escrever Artigo</a>
     <%} %>
 
-    <%if(loginfail){ 
-        if(error == 'login')
-        {
-        %>
+    <%if(loginfail){ %>
         <script>
             alert("Login Errado");
         </script>
-        <% }else 
-        { %>
-        <script>
-            alert("Senha Errada");
-        </script>
-        <% }
-    } %>
+        <% }%>
 </body>
 </html>

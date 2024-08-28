@@ -1,5 +1,7 @@
 const express = require('express');
 const route = express.Router();
+const multer = require('multer');
+const multerConfig = require('./src/config/multer');
 
 const render = require('./src/controllers/render');
 const user = require('./src/controllers/user');
@@ -15,7 +17,7 @@ route.get('/LogOut',user.logout);
 route.post('/Update/:id',user.UpdateUser);
 route.get('/Update/:id',render.pagUpdate);
 
-route.get('/WriteArticle', home.pagWriteArticle);
-route.post('/WriteArticle', article.registerArticle);
+route.get('/WriteArticle/:user', render.pagWriteArticle);
+route.post('/WriteArticle/:user', multer(multerConfig).single('Image'), article.registerArticle);
 
 module.exports = route;
