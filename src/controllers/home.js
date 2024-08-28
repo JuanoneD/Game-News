@@ -10,5 +10,8 @@ module.exports = {
         if(!id) return;
 
         res.render('../views/Update',{id, error: ''});
+    },
+    async pagWriteArticle(req,res){
+        res.render('../views/WriteArticle',{error: ''});
     }
 }
