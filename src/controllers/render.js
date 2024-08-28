@@ -3,7 +3,7 @@ const users = require('../model/user');
 
 module.exports = {
     async pagInicialGet(req, res){
-        res.render('../views/index',{loginfail: false,login:null});
+        res.render('../views/index',{login:null,error:null});
     },
     async pagUpdate(req,res){
         let id = req.params.id

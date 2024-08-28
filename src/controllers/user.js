@@ -1,10 +1,17 @@
 const { where } = require('sequelize');
 const users = require('../model/user');
 const { createHash } = require('crypto');
+const { error } = require('console');
 
 module.exports = {
     async registerUser(req,res){
         let data = req.body;
+
+        if(data.PasswordConfirm != data.Password){
+            res.render('../views/index', {error: 'A Senhas não coincidem',login:null})
+            return;
+        }
+
         await users.create({
             Name: data.Name,
             Password: createHash('sha256').update(data.Password).digest('hex'),
@@ -29,13 +36,13 @@ module.exports = {
         if(OldPassword.Password != createHash('sha256').update(data.Password).digest('hex'))
         {
             console.log(createHash('sha256').update(data.Password).digest('hex'));
-            res.render('../views/Update', {error: 'WrongPassword', id: id_user});
+            res.render('../views/Update', {error: 'Senha Errada', id: id_user});
             return;
         }
 
         if(data.PasswordNew1 != data.PasswordNew2)
         {
-            res.render('../views/Update', {error: 'RepeatMismatch', id: id_user});
+            res.render('../views/Update', {error: 'Senhas não coincedem', id: id_user});
             return;
         }
 
@@ -57,17 +64,17 @@ module.exports = {
         });
 
         if(!login){
-            res.render('../views/Index',{login,loginfail:true});
+            res.render('../views/Index',{login:null,error:'Usuario não encontrado'});
             return;
         }
-
+        
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.render('../views/Index',{login,loginfail:false});
+            res.render('../views/Index',{login:null,error:null});
             return;
         }
-        res.render('../views/Index',{login,loginfail:true});
+        res.render('../views/Index',{login:null,error:'Senha errada'});
     },
     async logout(req,res){
-        res.render('../views/Index',{login:null,loginfail:false})
+        res.redirect('/');
     }
 };
