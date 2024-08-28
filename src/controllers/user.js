@@ -15,8 +15,7 @@ module.exports = {
     },
     async UpdateUser(req,res){
         let data = req.body;
-        let id_user = await functions.getUserId(req,res);
-        if(!id_user){return;}
+        let id_user = req.params.id;
 
         OldPassword = await users.findByPk
         (
@@ -44,7 +43,8 @@ module.exports = {
             Password: createHash('sha256').update(data.Password2).digest('hex'),
             Email: data.Email,
             Admin: data.Admin
-        },{where:{IDUser:id}});
+        },{where:{IDUser:id_user}});
+        res.redirect('/');
     },
     async loginUser(req,res){
         let data = req.body;
@@ -56,14 +56,17 @@ module.exports = {
         });
 
         if(!login){
-            res.redirect('/loginError/?error=login');
+            res.render('../views/Index',{login,loginfail:true});
             return;
         }
 
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.redirect('/?id=' + encodeURIComponent(login.IDUser));
+            res.render('../views/Index',{login,loginfail:false});
             return;
         }
-        res.redirect('/loginError/?error=password');
+        res.render('../views/Index',{login,loginfail:true});
+    },
+    async logout(req,res){
+        res.render('../views/Index',{login:null,loginfail:false})
     }
 };

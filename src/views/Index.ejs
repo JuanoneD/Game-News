@@ -24,7 +24,11 @@
         <input type="password" name="Password">
         <input type="submit">
     </form>
-
+    
+    <%if(login){%>
+        <a href="/Update/<%=login.IDUser%>">Editar user</a>
+        <a href="/Logout">Deslogar</a>
+    <%} %>
 
     <%if(loginfail){ 
         if(error == 'login')

@@ -7,7 +7,12 @@ const errors = require('./src/controllers/errors');
 
 route.get('/', home.pagInicialGet);
 route.post('/', user.registerUser);
+
 route.post('/login',user.loginUser);
+route.get('/LogOut',user.logout);
+
+route.post('/Update/:id',user.UpdateUser);
+route.get('/Update/:id',home.pagUpdate);
 
 route.get('/loginError',errors.LoginError);
 module.exports = route;
