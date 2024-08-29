@@ -9,7 +9,7 @@ module.exports = {
         if(id){
             login = await users.findByPk(id,{
                 raw:true,
-                attributes:['IDUser','Name','Password','Email','Admin']
+                attributes:['IDUser','Name','Email','Admin']
             });
         }
         console.log(login);
