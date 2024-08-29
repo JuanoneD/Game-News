@@ -2,23 +2,25 @@ const { where } = require('sequelize');
 const users = require('../model/user');
 const { createHash } = require('crypto');
 const { error } = require('console');
+const renders = require('../config/renders');
 
 module.exports = {
     async registerUser(req,res){
         let data = req.body;
 
         if(data.PasswordConfirm != data.Password){
-            res.render('../views/index', {error: 'As Senhas não coincidem',login:null})
+            renders.renderIndex(res,'As Senhas não coincidem');
             return;
         }
-
+        
         await users.create({
             Name: data.Name,
             Password: createHash('sha256').update(data.Password).digest('hex'),
             Email: data.Email,
             Admin: data.Admin
         })
-        res.redirect('/');
+
+        renders.renderIndex(res,null,null,'Usuario cadastrado com sucesso');
     },
     async UpdateUser(req,res){
         let data = req.body;
@@ -64,17 +66,18 @@ module.exports = {
         });
 
         if(!login){
-            res.render('../views/Index',{login:null,error:'Usuario não encontrado'});
+            
+            renders.renderIndex(res,'Usuario não encontrado');
             return;
         }
         
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.render('../views/Index',{login:null,error:null});
+            renders.renderIndex(res,null,login,'Logado com sucesso');
             return;
         }
-        res.render('../views/Index',{login:null,error:'Senha errada'});
+        renders.renderIndex(res,'Senha errada');
     },
     async logout(req,res){
-        res.redirect('/');
+        renders.renderIndex(res,null,null,'Deslogado com sucesso');
     }
 };
