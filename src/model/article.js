@@ -31,6 +31,11 @@ const Article = db.define("Articles",
             type: Sequelize.STRING(254),
             allowNull: false,
         },
+        Description:
+        {
+            type: Sequelize.STRING(100),
+            allowNull: false,
+        }
     }
 );
 Article.belongsTo

@@ -18,6 +18,7 @@ module.exports = {
 
         await articles.create({
             Title: data.Title,
+            Description: data.Description,
             Highlight: false,
             Image: Img,
             Content: fileName,
