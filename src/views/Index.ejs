@@ -23,7 +23,6 @@
             <div class="d-flex" id="Registers">
                 <div class="container text-nowrap">
                     <%if(login){%>
-                        <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a><%}%>
                         <a  class="btn btn-primary" href="/Update/<%=login.IDUser%>">Editar</a>
                         <a  class="btn btn-danger" href="/Logout">Deslogar</a>
                     <%}else{%>
@@ -48,6 +47,12 @@
         <input type="submit">
     </form>
     <br>
+    
+    <%if(login){%>
+        <a href="/Update/<%=login.IDUser%>">Editar user</a>
+        <a href="/Logout">Deslogar</a>
+        <a href="/WriteArticle/<%=login.IDUser%>">Escrever Artigo</a>
+    <%} %>
 
 
     <!-- Modals -->
