@@ -12,7 +12,7 @@ route.get('/', render.pagInicialGet);
 route.post('/', user.registerUser);
 
 route.post('/login',user.loginUser);
-route.get('/LogOut/:id',user.logout);
+route.get('/LogOut',user.logout);
 
 route.post('/Update/:id',user.UpdateUser);
 route.get('/Update/:id',render.pagUpdate);
