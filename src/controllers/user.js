@@ -69,7 +69,7 @@ module.exports = {
         }
         
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.render('../views/Index',{login:null,error:null});
+            res.render('../views/Index',{login:login,error:null});
             return;
         }
         res.render('../views/Index',{login:null,error:'Senha errada'});

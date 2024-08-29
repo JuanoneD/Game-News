@@ -1,2 +1,6 @@
 /node_modules/*
 /src/config/db.js
+/public/articles/*
+!/public/articles/dummy
+/public/img/*
+!/public/img/dummy
