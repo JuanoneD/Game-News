@@ -8,7 +8,7 @@ module.exports = {
         let data = req.body;
 
         if(data.PasswordConfirm != data.Password){
-            res.render('../views/index', {error: 'A Senhas não coincidem',login:null})
+            res.render('../views/index', {error: 'As Senhas não coincidem',login:null})
             return;
         }
 
