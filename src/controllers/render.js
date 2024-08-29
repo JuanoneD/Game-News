@@ -4,13 +4,16 @@ const renders = require('../config/renders');
 
 module.exports = {
     async pagInicialGet(req, res){
-        renders.renderIndex(res);
-    },
-    async pagUpdate(req,res){
-        let id = req.params.id
-        if(!id) return;
-
-        res.render('../views/Update',{id, error: ''});
+        let id = req.params.id;
+        let login = null;
+        if(id){
+            login = await users.findByPk(id,{
+                raw:true,
+                attributes:['IDUser','Name','Password','Email','Admin']
+            });
+        }
+        console.log(login);
+        renders.renderIndex(res,null,login);
     },
     async pagWriteArticle(req,res){
         res.render('../views/WriteArticle',{error: ''});
