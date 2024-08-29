@@ -25,6 +25,7 @@
                     <%if(login){%>
                         <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a><%}%>
                         <a  class="btn btn-primary" href="/Update/<%=login.IDUser%>">Editar</a>
+                        <a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever Artigo</a>
                         <a  class="btn btn-danger" href="/Logout">Deslogar</a>
                     <%}else{%>
                         <a class="btn btn-outline-success" data-bs-toggle="modal"  data-bs-target="#LoginInsert" >Criar conta</a>

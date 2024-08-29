@@ -18,32 +18,53 @@ module.exports = {
 
         await articles.create({
             Title: data.Title,
-            Highlight: false,
+            Highlight: (data.Highlight == 'on' ? true : false),
             Image: Img,
             Content: fileName,
             IDUser: id_user
         });
-        res.redirect("/");
+        res.redirect("/" + id_user);
     },
     async updateArticle(req,res){
         let id_user = req.params.user;
         let id_article = req.params.article;
         let data = req.body;
 
-        let article= await articles.findByPk(id_article,{
+        let article = await articles.findByPk(id_article,{
             raw:true,
-            atribues:['Title','Highlight','Image','Content','IDUser']
+            atribues:['IDUser']
         });
 
+        if(req.file)
+        {
+            const Img = await articles.findByPk
+            (
+                id_article,
+                {
+                    raw: true,
+                    attributes: ['Image']
+                }
+            );
+            fs.unlink(`public/img/${Img.Image}`,(err) => {if(err){console.log(err);}});
+            await articles.update
+            (
+                {
+                    Image: req.file.filename
+                },
+                {
+                    where: {IDArticle: id_article}
+                }
+            );
+        }
+
         if(article.IDUser != id_user){
-            res.redirect('/',{error: 'NoPermission'});
+            res.redirect('/' + id_user);
             return;
         }
 
         await articles.update({
             Title: data.Title,
-            Highlight:data.Highlight,
-            Image: data.Image,
+            Highlight: (data.Highlight == 'on' ? true : false),
             Content: data.Content
         },{where: {IDArticle: id_article }});
     },
@@ -51,16 +72,26 @@ module.exports = {
         let id_user = req.params.id;
         let id_article = req.params.idArticle;
 
-        let article=  await articles.findByPk(id_article,{
+        let article = await articles.findByPk(id_article,{
             raw:true,
-            atribues:['Title','Highlight','Image','Content','IDUser']
+            atribues:['IDUser']
         });
 
         if(article.IDUser != id_user){
-            res.redirect('/',{error: 'NoPermission'});
+            res.redirect('/' + id_user);
             return;
         }
+
+        const Img = await articles.findByPk
+        (
+            id_article,
+            {
+                raw: true,
+                attributes: ['Image']
+            }
+        );
+        fs.unlink(`public/img/${Img.Image}`,(err) => {if(err){console.log(err);}});
+
         await articles.destroy({where:{IDArticle : id_article}});
     }
-    
 }
