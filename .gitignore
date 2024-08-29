@@ -4,3 +4,5 @@
 !/public/articles/dummy
 /public/img/*
 !/public/img/dummy
+/public/sessions/*
+!/public/sessions/dummy

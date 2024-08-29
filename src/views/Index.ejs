@@ -24,7 +24,7 @@
             <div class="d-flex" id="Registers">
                 <div class="container text-nowrap">
                     <%if(login){%>
-                        <a  class="btn btn-danger" href="/Logout">Deslogar</a>
+                        <a  class="btn btn-danger" href="/Logout/<%= login.IDUser %>">Deslogar</a>
                     <%}else{%>
                         <a class="btn btn-outline-success" data-bs-toggle="modal"  data-bs-target="#LoginInsert" >Criar conta</a>
                         <a class="btn btn-outline-success" data-bs-toggle="modal"  data-bs-target="#LoginUser" >Login</a>

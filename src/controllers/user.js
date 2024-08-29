@@ -2,6 +2,7 @@ const { where } = require('sequelize');
 const users = require('../model/user');
 const { createHash } = require('crypto');
 const { error } = require('console');
+const Session = require('../config/session');
 
 module.exports = {
     async registerUser(req,res){
@@ -69,12 +70,14 @@ module.exports = {
         }
         
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
-            res.render('../views/Index',{login:login,error:null});
+            Session.CreateSession(login);
+            res.render('../views/Index',{login:Session.GetSession(login.IDUser),error:null});
             return;
         }
         res.render('../views/Index',{login:null,error:'Senha errada'});
     },
     async logout(req,res){
+        Session.DeleteSession(req.params.id);
         res.redirect('/');
     }
 };
