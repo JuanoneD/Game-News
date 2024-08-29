@@ -19,6 +19,7 @@ module.exports = {
         await articles.create({
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
+            Description: data.Description,
             Image: Img,
             Content: fileName,
             IDUser: id_user
@@ -65,6 +66,7 @@ module.exports = {
         await articles.update({
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
+            Description: data.Description,
             Content: data.Content
         },{where: {IDArticle: id_article }});
     },
