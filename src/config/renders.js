@@ -10,4 +10,6 @@ module.exports={
         });
         res.render('../views/index', {error:error,login:login,message:message,articles:articles})
     },
+
+    
 };

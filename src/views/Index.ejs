@@ -60,7 +60,7 @@
                 <div class="carousel-inner">
                     <%j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){j++;%>
                         <div class="carousel-item <%=j==1? 'active':''%>">
-                            <a href="#"><img src="/img/<%=articles[i].Image%>" class="d-block w-100"  style="height: 600px;object-fit: cover;background: linear-gradient(white, black); opacity:0.9"></a>
+                            <a href="<%=articles[i].IDArticle%>/<%=login?login.IDUser:''%>"><img src="/img/<%=articles[i].Image%>" class="d-block w-100"  style="height: 600px;object-fit: cover;background: linear-gradient(white, black); opacity:0.9"></a>
                             <div class="carousel-caption d-none d-md-block font-weight-bold " style="opacity:1">
                                 <h5 class="new-amsterdam-title"><%=articles[i].Title%></h5>
                                 <p><%=articles[i].Description%></p>
