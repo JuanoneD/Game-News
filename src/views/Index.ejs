@@ -35,13 +35,8 @@
         </div>
     </header>
     <main>
-        <section class="container">
-            <div class="carousel slide">
-                <div class="carousel-indicators">
-                    <%let j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){ j++;%>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%=j%>" <%if(i == 0){%>class="active" <%}%> aria-current="true"></button>
-                    <%}}%>
-                </div>
+        <section class="container"  style="margin-top: 2%;">
+            <div class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <%for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){%>
                         <div class="carousel-item active">
@@ -84,7 +79,7 @@
                             <label for="Password" class="form-label"  id="login_password" >Senha:</label>
                             <input type="password" class="form-control"  name="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary fw-bold text-uppercase" onclick="saveLogin()">Logar</button>
+                        <button type="submit" class="btn btn-primary fw-bold text-uppercase">Logar</button>
                     </form>
                 </div>
             </div>
