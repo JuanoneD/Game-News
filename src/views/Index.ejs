@@ -24,7 +24,6 @@
                 <div class="container text-nowrap">
                     <%if(login){%>
                         <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a><%}%>
-                        <a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever Artigo</a>
                         <a  class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UpdateUser">Editar</a>
                         <a  class="btn btn-danger" href="/Logout">Deslogar</a>
                     <%}else{%>

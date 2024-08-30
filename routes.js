@@ -8,13 +8,13 @@ const user = require('./src/controllers/user');
 const article = require('./src/controllers/article');
 
 
+route.get('/Logout',user.logout);
 route.get('/', render.pagInicialGet);
 route.get('/:id',render.pagInicialGet);
 
 route.post('/', user.registerUser);
 
 route.post('/login',user.loginUser);
-route.get('/LogOut',user.logout);
 
 route.post('/Update/:id',user.UpdateUser);
 
