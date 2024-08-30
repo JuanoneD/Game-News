@@ -6,7 +6,7 @@ module.exports={
 
         let articles = await artilcle.findAll({
             raw:true,
-            attributes: ['Title','Highlight','Image','Content','IDUser']
+            attributes: ['IDArticle','Title','Highlight','Image','Content','IDUser','Description']
         });
         res.render('../views/index', {error:error,login:login,message:message,articles:articles})
     },
