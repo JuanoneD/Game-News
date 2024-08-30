@@ -60,7 +60,7 @@
                 <div class="carousel-inner">
                     <%j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){j++;%>
                         <div class="carousel-item <%=j==1? 'active':''%>">
-                            <a href="articles/<%=login?login.IDUser:''%>/<%=articles[i].IDArticle%>"><img src="/img/<%=articles[i].Image%>" class="d-block w-100"  style="height: 600px;object-fit: cover;background: linear-gradient(white, black); opacity:0.9"></a>
+                            <a href="articles/<%=login?login.IDUser:'0'%>/<%=articles[i].IDArticle%>"><img src="/img/<%=articles[i].Image%>" class="d-block w-100"  style="height: 600px;object-fit: cover;background: linear-gradient(white, black); opacity:0.9"></a>
                             <div class="carousel-caption d-none d-md-block font-weight-bold " style="opacity:1">
                                 <h5 class="new-amsterdam-title"><%=articles[i].Title%></h5>
                                 <p><%=articles[i].Description%></p>
@@ -92,7 +92,7 @@
                             <%=articles[i].Description%>
                         </div>
                         <div class="card-footer">
-                            <a href="articles/<%=login?login.IDUser:''%>/<%=articles[i].IDArticle%>" class="btn btn-primary buttonHover">Abrir Noticia</a>
+                            <a href="articles/<%=login?login.IDUser:'0'%>/<%=articles[i].IDArticle%>" class="btn btn-primary buttonHover">Abrir Noticia</a>
                         </div>
                     </div>
                 </div>
@@ -171,11 +171,11 @@
                         <form method="post"  action="/Update/<%=login.IDUser%>">
                             <div class="mb-3">
                                 <label for="Name" class="form-label">Nome:</label>
-                                <input type="text" class="form-control"  name="Name">
+                                <input type="text" class="form-control"  value="<%=login.Name%>" name="Name">
                             </div>
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Email:</label>
-                                <input type="text" class="form-control"  name="Email">
+                                <input type="text" class="form-control" value="<%=login.Email%>" name="Email">
                             </div>
                             <div class="mb-3">
                                 <label for="Password" class="form-label">Senha Antiga:</label>

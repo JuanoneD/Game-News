@@ -6,6 +6,7 @@ const multerConfig = require('./src/config/multer');
 const render = require('./src/controllers/render');
 const user = require('./src/controllers/user');
 const article = require('./src/controllers/article');
+const comment = require('./src/controllers/comment');
 
 route.get('/logout',user.logout);
 route.post('/login',user.loginUser);
@@ -20,7 +21,9 @@ route.post('/UpdateArticle/:user/:article', multer(multerConfig).single('Image')
 
 route.get('/DeleteArticle/:user/:article', article.deleteArticle);
 
-route.get('/article/:user/:article')
+route.get('/articles/:user/:article',render.showArticle);
+
+route.post('/comment/:user/:article',comment.registerComment);
 
 
 
