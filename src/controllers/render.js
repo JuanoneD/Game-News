@@ -6,7 +6,8 @@ module.exports = {
     async pagInicialGet(req, res){
         let id = req.params.id;
         let login = null;
-        if(typeof(id) === Number){
+        console.log(id);
+        if(Number(id)){
             login = await users.findByPk(id,{
                 raw:true,
                 attributes:['IDUser','Name','Password','Email','Admin']
