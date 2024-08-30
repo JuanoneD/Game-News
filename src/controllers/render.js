@@ -17,6 +17,17 @@ module.exports = {
         renders.renderIndex(res,null,login);
     },
     async pagWriteArticle(req,res){
-        res.render('../views/WriteArticle',{error: ''});
+        let id = req.params.user;
+        if(Number(id)){
+            login = await users.findByPk(id,{
+                raw:true,
+                attributes:['IDUser','Name','Password','Email','Admin']
+            });
+        }
+        if(login.Admin == 0){
+            res.redirect(`/${id}`);
+            return;
+        }
+        res.render('../views/WriteArticle',{login,error: ''});
     }
 }
