@@ -33,7 +33,7 @@ const Article = db.define("Articles",
         },
         Description:
         {
-            type: Sequelize.STRING(100),
+            type: Sequelize.STRING(254),
             allowNull: false,
         }
     }
