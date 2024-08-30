@@ -35,11 +35,11 @@
         </div>
     </header>
     
-    <form method="post" enctype="multipart/form-data" <%= edit ? 'action=\"/UpdateArticle/login.IDUser/article.IDArticle\"': ''%>>
+    <form method="post" enctype="multipart/form-data">
         <label for="Title">Título</label>
-        <input type="text" name="Title" placeholder="Título do artigo" maxlength="250" value="<%= edit ? article.Title : ''%>">
+        <input type="text" name="Title" placeholder="Título do artigo" maxlength="100" value="<%= edit ? article.Title : ''%>">
         <label for="Highlight">Destacar Artigo</label>
-        <input type="checkbox" name="Highlight" <%= edit ? (article.Highlight ? 'value="on"' : '') : ''%>>
+        <input type="checkbox" name="Highlight" <%= edit ? (article.Highlight ? 'checked' : '') : ''%>>
         <label for="Description">Descrição</label>
         <textarea name="Description" placeholder="Escreva aqui..." cols="50" rows="5" maxlength="250"><%= edit ? article.Description : ''%></textarea>
         <label for="Content">Conteúdo</label>

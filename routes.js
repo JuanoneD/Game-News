@@ -15,7 +15,7 @@ route.post('/Update/:id',user.UpdateUser);
 route.get('/WriteArticle/:user', render.pagWriteArticle);
 route.post('/WriteArticle/:user', multer(multerConfig).single('Image'), article.registerArticle);
 
-route.get('/UpdateArticle/:user/:article', render.pagWriteArticle);
+route.get('/UpdateArticle/:user/:article', render.pagEditArticle);
 route.post('/UpdateArticle/:user/:article', multer(multerConfig).single('Image'), article.updateArticle);
 
 route.get('/DeleteArticle/:user/:article', article.deleteArticle);
