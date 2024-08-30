@@ -1,7 +1,10 @@
 const articles = require('../model/article');
 const users = require('../model/user');
+const comments = require('../model/comment');
 const renders = require('../config/renders');
 const fs = require('fs');
+const { raw } = require('express');
+const { where } = require('sequelize');
 
 module.exports = {
     async pagInicialGet(req, res){
@@ -58,7 +61,30 @@ module.exports = {
         res.render('../views/WriteArticle',{login,error: '',edit:true,article:article});
     },
     async showArticle(req,res){
-        id_user = req.params.IDUser;
-        
+        let id_user = req.params.user;
+        let id_article = req.params.article;
+
+        let login = await users.findByPk(id_user,{
+            raw:true,
+            attributes:['IDUser','Name','Password','Email','Admin']
+        })
+
+        let article = await articles.findByPk(id_article,{
+            raw:true,
+            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','Image']
+        })
+
+        let comment = await comments.findAll({
+            raw:true,
+            attributes:['Description','User.Name'],
+            include:{
+                model:users
+            },
+            where:{'IDArticle':id_article}
+        });
+
+        article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
+
+        res.render('../views/ShowArticle',{login,article,error:null,message:null,comment});
     }
 }

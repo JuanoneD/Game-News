@@ -5,17 +5,18 @@ const { where } = require('sequelize');
 
 module.exports = {
     async registerComment(req,res){
-        let id_user = req.params.id;
-        let id_artice = req.params.idArticle;
+        let id_user = req.params.user;
+        let id_article = req.params.article;
 
         let data = req.body;
+
 
         await comments.create({
             Description: data.Description,
             IDUser: id_user,
-            idArticle: id_artice
+            IDArticle: id_article
         });
-        res.redirect(`/Articles/${id_user}/${id_artice}`); /// chage to the link for articles
+        res.redirect(`/Articles/${id_user}/${id_article}`); /// chage to the link for articles
     },
     async updateComment(req,res){
         let id_user = req.params.id;
