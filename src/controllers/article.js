@@ -57,6 +57,8 @@ module.exports = {
                 }
             );
         }
+        
+        fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
         if(article.IDUser != id_user){
             res.redirect('/' + id_user);
@@ -66,13 +68,13 @@ module.exports = {
         await articles.update({
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
-            Description: data.Description,
-            Content: data.Content
+            Description: data.Description
         },{where: {IDArticle: id_article }});
+        res.redirect('/' + id_user);
     },
     async deleteArticle(req,res){
-        let id_user = req.params.id;
-        let id_article = req.params.idArticle;
+        let id_user = req.params.user;
+        let id_article = req.params.article;
 
         let article = await articles.findByPk(id_article,{
             raw:true,
@@ -95,5 +97,6 @@ module.exports = {
         fs.unlink(`public/img/${Img.Image}`,(err) => {if(err){console.log(err);}});
 
         await articles.destroy({where:{IDArticle : id_article}});
+        res.redirect('/' + id_user);
     }
 }

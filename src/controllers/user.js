@@ -1,7 +1,5 @@
-const { where } = require('sequelize');
 const users = require('../model/user');
 const { createHash } = require('crypto');
-const { error } = require('console');
 const renders = require('../config/renders');
 
 module.exports = {
