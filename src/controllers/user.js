@@ -78,6 +78,6 @@ module.exports = {
         renders.renderIndex(res,'Senha errada');
     },
     async logout(req,res){
-        renders.renderIndex(res,null,null,'Deslogado com sucesso');
+        res.redirect('/');
     }
 };
