@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Game News</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Fonts log -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
 </head>
 <body>
     <header class="shadow">
@@ -29,17 +35,22 @@
         </div>
     </header>
     
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" <%= edit ? 'action=\"/UpdateArticle/login.IDUser/article.IDArticle\"': ''%>>
         <label for="Title">Título</label>
-        <input type="text" name="Title" placeholder="Título do artigo">
+        <input type="text" name="Title" placeholder="Título do artigo" maxlength="250" value="<%= edit ? article.Title : ''%>">
         <label for="Highlight">Destacar Artigo</label>
-        <input type="checkbox" name="Highlight">
+        <input type="checkbox" name="Highlight" <%= edit ? (article.Highlight ? 'value="on"' : '') : ''%>>
         <label for="Description">Descrição</label>
-        <textarea name="Description" placeholder="Escreva aqui..." cols="50" rows="5"></textarea>
+        <textarea name="Description" placeholder="Escreva aqui..." cols="50" rows="5" maxlength="250"><%= edit ? article.Description : ''%></textarea>
         <label for="Content">Conteúdo</label>
-        <textarea name="Content" placeholder="Escreva aqui..." cols="200" rows="30"></textarea>
+        <textarea name="Content" placeholder="Escreva aqui..." cols="200" rows="30" maxlength="2800" id="Content"><%= edit ? article.Content : ''%></textarea>
         <input type="file" name="Image" accept="image/*">
         <input type="submit">
     </form>
+    <%if(edit){%>
+    <a href="/DeleteArticle/<%= login.IDUser %>/<%= article.IDArticle %>" class="btn btn-danger">Deletar artigo</a>
+    <%}%>
+    <script src="/script/article.js"></script>
+    
 </body>
 </html>
