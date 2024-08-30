@@ -35,7 +35,7 @@
         </div>
     </header>
     
-    <form method="post" enctype="multipart/form-data" <%= edit ? 'action=\"/UpdateArticle/login.IDUser/article.IDArticle\"': ''%>>
+    <form method="post" enctype="multipart/form-data">
         <label for="Title">Título</label>
         <input type="text" name="Title" placeholder="Título do artigo" maxlength="250" value="<%= edit ? article.Title : ''%>">
         <label for="Highlight">Destacar Artigo</label>

@@ -38,7 +38,7 @@ module.exports = {
         let login = null;
 
         if(Number(id_user)){
-            login = await users.findByPk(id,{
+            login = await users.findByPk(id_user,{
                 raw:true,
                 attributes:['IDUser','Name','Password','Email','Admin']
             });

@@ -36,6 +36,11 @@ module.exports = {
             atribues:['IDUser']
         });
 
+        if(article.IDUser != id_user){
+            res.redirect('/' + id_user);
+            return;
+        }
+
         if(req.file)
         {
             const Img = await articles.findByPk
@@ -58,17 +63,15 @@ module.exports = {
             );
         }
 
-        if(article.IDUser != id_user){
-            res.redirect('/' + id_user);
-            return;
-        }
+        fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
         await articles.update({
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
-            Description: data.Description,
-            Content: data.Content
+            Description: data.Description
         },{where: {IDArticle: id_article }});
+
+        res.redirect('/' + id_user);
     },
     async deleteArticle(req,res){
         let id_user = req.params.id;
@@ -95,5 +98,6 @@ module.exports = {
         fs.unlink(`public/img/${Img.Image}`,(err) => {if(err){console.log(err);}});
 
         await articles.destroy({where:{IDArticle : id_article}});
+        res.redirect('/' + id_user);
     }
 }
