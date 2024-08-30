@@ -7,7 +7,11 @@ document.addEventListener
     {
         Theme = localStorage.getItem("Theme");
         document.getElementById("body").setAttribute("data-bs-theme", Theme);
+<<<<<<< HEAD
         let Button = document.getElementById("theme");
+=======
+        Button = document.getElementById("theme");
+>>>>>>> 3853927 (Dark theme implemented)
         if(Theme == 'light')
         {
             Button.innerHTML = '🌙';
