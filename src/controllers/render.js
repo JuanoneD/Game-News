@@ -56,5 +56,9 @@ module.exports = {
         
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
         res.render('../views/WriteArticle',{login,error: '',edit:true,article:article});
+    },
+    async showArticle(req,res){
+        id_user = req.params.IDUser;
+        
     }
 }

@@ -20,6 +20,8 @@ route.post('/UpdateArticle/:user/:article', multer(multerConfig).single('Image')
 
 route.get('/DeleteArticle/:user/:article', article.deleteArticle);
 
+route.get('/article/:user/:article')
+
 
 
 route.post('/', user.registerUser);
