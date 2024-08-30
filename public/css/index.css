@@ -5,3 +5,16 @@
     font-style: normal;
     font-size: 200%;
 }
+.FormText
+{
+    font-size: large;
+}
+.FormImg
+{
+    width: 50%;
+    aspect-ratio: 1.7;
+    align-self: center;
+    object-fit: cover;
+    overflow: hidden;
+    margin-bottom: 3%;
+}

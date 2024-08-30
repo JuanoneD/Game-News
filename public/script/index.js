@@ -7,7 +7,7 @@ document.addEventListener
     {
         Theme = localStorage.getItem("Theme");
         document.getElementById("body").setAttribute("data-bs-theme", Theme);
-        Button = document.getElementById("theme");
+        let Button = document.getElementById("theme");
         if(Theme == 'light')
         {
             Button.innerHTML = '🌙';
@@ -25,7 +25,7 @@ function errorclick(){
 
 function ToggleTheme()
 {
-    Button = document.getElementById("theme");
+    let Button = document.getElementById("theme");
     if(Theme == 'dark')
     {
         Theme = 'light';
@@ -37,4 +37,15 @@ function ToggleTheme()
     }
     localStorage.setItem("Theme", Theme);
     document.getElementById("body").setAttribute("data-bs-theme", Theme);
+}
+
+function ChangeFormImg()
+{
+    let input = document.getElementById("ImgInput");
+    if(input.files[0])
+    {
+        let Reader = new FileReader();
+        Reader.onload = (e)=>{document.getElementById("FormImg").src = e.target.result};
+        Reader.readAsDataURL(input.files[0]);
+    }
 }
