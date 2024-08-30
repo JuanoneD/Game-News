@@ -35,31 +35,33 @@
         </div>
     </header>
     <main>
-        <section class="carousel slide">
-            <div class="carousel-indicators">
-                <%for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){%>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%=i%>" <%if(i == 0){%>class="active" <%}%> aria-current="true"></button>
-                <%}}%>
-            </div>
-            <div class="carousel-inner">
-                <%for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){%>
-                    <div class="carousel-item active">
-                        <img src="/img/<%=articles[i].Image%>" class="d-block w-100">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5><%=articles[i].Title%></h5>
-                            <p><%=articles[i].Description%></p>
+        <section class="container">
+            <div class="carousel slide">
+                <div class="carousel-indicators">
+                    <%let j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){ j++;%>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%=j%>" <%if(i == 0){%>class="active" <%}%> aria-current="true"></button>
+                    <%}}%>
+                </div>
+                <div class="carousel-inner">
+                    <%for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){%>
+                        <div class="carousel-item active">
+                            <img src="/img/<%=articles[i].Image%>" class="d-block w-100">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5><%=articles[i].Title%></h5>
+                                <p><%=articles[i].Description%></p>
+                            </div>
                         </div>
-                    </div>
-                <%}}%>
+                    <%}}%>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
         </section>
     </main>
 
@@ -75,14 +77,14 @@
                 <div class="modal-body">
                     <form method="post"  action="/login">
                         <div class="mb-3">
-                            <label for="Email" class="form-label">Email:</label>
+                            <label for="Email" class="form-label"  id="login_email">Email:</label>
                             <input type="text" class="form-control"  name="Email">
                         </div>
                         <div class="mb-3">
-                            <label for="Password" class="form-label">Senha:</label>
+                            <label for="Password" class="form-label"  id="login_password" >Senha:</label>
                             <input type="password" class="form-control"  name="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary fw-bold text-uppercase">Logar</button>
+                        <button type="submit" class="btn btn-primary fw-bold text-uppercase" onclick="saveLogin()">Logar</button>
                     </form>
                 </div>
             </div>
@@ -100,7 +102,7 @@
                     <form method="post"  action="/">
                         <div class="mb-3">
                             <label for="Name" class="form-label">Nome:</label>
-                            <input type="text" class="form-control"  name="Name">
+                            <input type="text" class="form-control" name="Name">
                         </div>
                         <div class="mb-3">
                             <label for="Email" class="form-label">Email:</label>
