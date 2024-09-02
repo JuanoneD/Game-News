@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 const Users = require('./user');
 const Methods = require('./methods');
-const Subscriptions = require('./subscriptions');
 
 const Payments = db.define('Payments',{
     IDPayment:

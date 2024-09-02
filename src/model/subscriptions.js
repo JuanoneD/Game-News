@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
-const Benefits = require('./benefits');
+
 
 const Subscriptions = db.define("Subscription",{
     IDSubscription:

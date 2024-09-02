@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
+const Subscriptions = require('./subscriptions');
+const Benefits = require('./benefits');
 
 const SubscriptionsBenefits = db.define('SubscriptionsBenefits'{
     IDSubscriptionsBenefits:{
@@ -12,5 +14,8 @@ const SubscriptionsBenefits = db.define('SubscriptionsBenefits'{
 
 Subscriptions.belongsToMany(Benefits,{through:'SubscriptionsBenefits'});
 Benefits.belongsToMany(Subscriptions,{through:'SubscriptionsBenefits'});
+
+Sequelize.sync({force: true})
+
 
 module.exports = SubscriptionsBenefits;
