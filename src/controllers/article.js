@@ -33,7 +33,7 @@ module.exports = {
 
         let article = await articles.findByPk(id_article,{
             raw:true,
-            atribues:['IDUser']
+            atribues:['IDArticle','IDUser','Content','Title']
         });
 
         if(article.IDUser != id_user){
@@ -62,15 +62,20 @@ module.exports = {
                 }
             );
         }
-        
-        fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
+        if(data.Title != article.Title)
+        {
+            fs.unlink("public/articles/" + article.Content, (err) => {if(err){console.log(err)}})
+            article.Content = `${new Date().getTime()}-${data.Title}.txt`;
+        }
+        
         fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
         await articles.update({
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
-            Description: data.Description
+            Description: data.Description,
+            Content: article.Content
         },{where: {IDArticle: id_article }});
         res.redirect('/' + id_user);
     },

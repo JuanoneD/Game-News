@@ -24,6 +24,7 @@ route.get('/UpdateArticle/:user/:article', render.pagEditArticle);
 route.post('/UpdateArticle/:user/:article', multer(multerConfig).single('Image'), article.updateArticle);
 
 route.get('/DeleteArticle/:user/:article', article.deleteArticle);
+route.get('/DeleteComment/:user/:comment', comment.deleteComment);
 
 route.get('/articles/:user/:article',render.showArticle);
 

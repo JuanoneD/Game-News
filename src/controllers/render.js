@@ -76,17 +76,28 @@ module.exports = {
 
         let article = await articles.findByPk(id_article,{
             raw:true,
-            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','Image']
+            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','Image','createdAt','updatedAt', 'User.Name'],
+            include:{
+                model:users
+            },
         })
 
         let comment = await comments.findAll({
             raw:true,
-            attributes:['Description','User.Name'],
+            attributes:['IDComment','Description','User.Name','IDUser','createdAt','updatedAt'],
             include:{
                 model:users
             },
             where:{'IDArticle':id_article}
         });
+
+        article.createdAt = new Date(article.createdAt).toLocaleString('pt-BR');
+        article.updatedAt = new Date(article.updatedAt).toLocaleString('pt-BR');
+
+        comment.forEach((item) =>{
+            item.createdAt = new Date(item.createdAt).toLocaleString('pt-BR');
+            item.updatedAt = new Date(item.updatedAt).toLocaleString('pt-BR');
+        })
 
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
 

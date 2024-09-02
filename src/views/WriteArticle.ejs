@@ -43,7 +43,7 @@
             </div>
             <div class="mb-3">
                 <img alt="Imagem do Artigo" id="FormImg" class="FormImg form-control">
-                <input type="file" id="ImgInput" name="Image" oninput="ChangeFormImg()" accept="image/*" class="form-control FormText" required>
+                <input type="file" id="ImgInput" name="Image" oninput="ChangeFormImg()" accept="image/*" class="form-control FormText" <%= edit ? '' : 'required' %>>
             </div>
             <div class="mb-3">
                 <label for="Description" class="form-label FormText">Descrição</label>
