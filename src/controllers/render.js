@@ -3,8 +3,6 @@ const users = require('../model/user');
 const comments = require('../model/comment');
 const renders = require('../config/renders');
 const fs = require('fs');
-const { raw } = require('express');
-const { where } = require('sequelize');
 
 module.exports = {
     async pagInicialGet(req, res){
@@ -71,17 +69,23 @@ module.exports = {
 
         let article = await articles.findByPk(id_article,{
             raw:true,
-            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','Image']
+            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','Image','createdAt','updatedAt', 'User.Name'],
+            include:{
+                model:users
+            },
         })
 
         let comment = await comments.findAll({
             raw:true,
-            attributes:['Description','User.Name'],
+            attributes:['IDComment','Description','User.Name','IDUser'],
             include:{
                 model:users
             },
             where:{'IDArticle':id_article}
         });
+
+        article.createdAt = new Date(article.createdAt).toLocaleString('pt-BR', {timeZone: 'UTC'});
+        article.updatedAt = new Date(article.updatedAt).toLocaleString('pt-BR', {timeZone: 'UTC'});
 
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
 

@@ -36,13 +36,13 @@ module.exports = {
         if(OldPassword.Password != createHash('sha256').update(data.Password).digest('hex'))
         {
             console.log(createHash('sha256').update(data.Password).digest('hex'));
-            res.render('../views/Update', {error: 'Senha Errada', id: id_user});
+            renders.renderIndex(res, 'Senha Errada');
             return;
         }
 
         if(data.PasswordNew1 != data.PasswordNew2)
         {
-            res.render('../views/Update', {error: 'Senhas não coincedem', id: id_user});
+            renders.renderIndex(res, 'Senhas Não Coincidem');
             return;
         }
 

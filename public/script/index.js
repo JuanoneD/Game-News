@@ -7,6 +7,7 @@ document.addEventListener
     {
         Theme = localStorage.getItem("Theme");
         document.getElementById("body").setAttribute("data-bs-theme", Theme);
+        let CarouselTitle = document.getElementsByName("CarouselTitle");
         let Button = document.getElementById("theme");
         if(Theme == 'light')
         {
@@ -15,6 +16,7 @@ document.addEventListener
         {
             Button.innerHTML = '☀️';
         }
+        CarouselTitle.forEach((item)=>{item.classList.add(`OutlinedText-${Theme}`)});
     }
 )
 
@@ -26,6 +28,8 @@ function errorclick(){
 function ToggleTheme()
 {
     let Button = document.getElementById("theme");
+    let CarouselTitle = document.getElementsByName("CarouselTitle");
+    CarouselTitle.forEach((item)=>{item.classList.remove(`OutlinedText-${Theme}`)});
     if(Theme == 'dark')
     {
         Theme = 'light';
@@ -37,6 +41,8 @@ function ToggleTheme()
     }
     localStorage.setItem("Theme", Theme);
     document.getElementById("body").setAttribute("data-bs-theme", Theme);
+
+    CarouselTitle.forEach((item)=>{item.classList.add(`OutlinedText-${Theme}`)});
 }
 
 function ChangeFormImg()

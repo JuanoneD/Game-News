@@ -62,9 +62,9 @@
                     <%j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){j++;%>
                         <div class="carousel-item <%=j==1? 'active':''%>">
                             <a href="articles/<%=login?login.IDUser:'0'%>/<%=articles[i].IDArticle%>"><img src="/img/<%=articles[i].Image%>" class="d-block w-100"  style="height: 600px;object-fit: cover;background: linear-gradient(white, black); opacity:0.9"></a>
-                            <div class="carousel-caption d-none d-md-block font-weight-bold " style="opacity:1">
+                            <div class="carousel-caption d-none d-md-block font-weight-bold OutlinedText-light" style="opacity:1" name="CarouselTitle">
                                 <h5 class="new-amsterdam-title"><%=articles[i].Title%></h5>
-                                <p><%=articles[i].Description%></p>
+                                <p style="font-weight: 600;"><%=articles[i].Description%></p>
                             </div>
                         </div>
                     <%}}%>
