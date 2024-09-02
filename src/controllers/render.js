@@ -5,6 +5,7 @@ const renders = require('../config/renders');
 const fs = require('fs');
 const { raw } = require('express');
 const { where } = require('sequelize');
+const { log } = require('console');
 
 module.exports = {
     async pagInicialGet(req, res){
@@ -86,5 +87,17 @@ module.exports = {
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
 
         res.render('../views/ShowArticle',{login,article,error:null,message:null,comment});
+    },
+    async pagAdmPage(req,res){
+        let id = req.params.user;
+        let login = await users.findByPk(id,{
+            raw:true,
+            attributes:['IDUser','Name','Password','Email','Admin']
+        })
+        if(login.Admin == 0){
+            res.redirect(`/${login.IDUser}`);
+            return
+        }
+        res.render('../views/AdmPage',{login,error:null,message:null});
     }
 }
