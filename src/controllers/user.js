@@ -29,20 +29,20 @@ module.exports = {
             id_user, 
             {
                 raw: true,
-                attributes: ['Password']
+                attributes: ['IDUser','Name','Password','Email','Admin']
             }
         );
 
         if(OldPassword.Password != createHash('sha256').update(data.Password).digest('hex'))
         {
             console.log(createHash('sha256').update(data.Password).digest('hex'));
-            res.render('../views/Update', {error: 'Senha Errada', id: id_user});
+            renders.renderIndex(res,'Senha Errada',OldPassword);
             return;
         }
 
         if(data.PasswordNew1 != data.PasswordNew2)
         {
-            res.render('../views/Update', {error: 'Senhas não coincedem', id: id_user});
+            renders.renderIndex(res,'Senhas não coincedem',OldPassword);
             return;
         }
 
@@ -52,7 +52,7 @@ module.exports = {
             Email: data.Email,
             Admin: data.Admin
         },{where:{IDUser:id_user}});
-        res.redirect('/');
+        res.redirect(`/${OldPassword.IDUser}`);
     },
     async loginUser(req,res){
         let data = req.body;

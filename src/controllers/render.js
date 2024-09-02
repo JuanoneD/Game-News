@@ -2,9 +2,14 @@ const articles = require('../model/article');
 const users = require('../model/user');
 const comments = require('../model/comment');
 const renders = require('../config/renders');
+const methods = require('../model/methods');
+const benefits = require('../model/benefits');
+const subscriptions = require('../model/subscriptions');
 const fs = require('fs');
 const { raw } = require('express');
 const { where } = require('sequelize');
+const Benefits = require('../model/benefits');
+const subscriptionsBenefits = require('../model/subscriptionsBenefits');
 
 module.exports = {
     async pagInicialGet(req, res){
@@ -86,5 +91,54 @@ module.exports = {
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
 
         res.render('../views/ShowArticle',{login,article,error:null,message:null,comment});
+    },
+    async pagAdmPage(req,res){
+        let id = req.params.user;
+        let login = await users.findByPk(id,{
+            raw:true,
+            attributes:['IDUser','Name','Password','Email','Admin']
+        })
+        if(login.Admin == 0){
+            res.redirect(`/${login.IDUser}`);
+            return
+        }
+
+        let method = await methods.findAll({
+            raw:true,
+            atributtes:['IDMethod','Description']
+        });
+
+        let benefit = await benefits.findAll({
+            raw:true,
+            atributtes:['IDBenefit','Description']
+        });
+
+        let subscription = await subscriptions.findAll({
+            raw:true,
+            atributtes:['IDSubscription','Description']
+        });
+
+        // await subscription.forEach(async (sub,index) => {            
+        //     let listBenefits = await subscriptionsBenefits.findAll({
+        //         raw:true,
+        //         atributtes:['IDBenefit'],
+        //         where:{'SubscriptionIDSubscription':sub.IDSubscription}
+        //     });
+        //     subscription[index].listBenefits = listBenefits;
+        // })
+
+        const AllInfo = await Promise.all(subscription.map(async (subscrip)=>{
+            const listBenefits = await subscriptionsBenefits.findAll({
+                raw:true,
+                atributtes:['IDBenefit'],
+                where : {SubscriptionIDSubscription: subscrip.IDSubscription}
+            });
+            return{...subscrip,listBenefits};
+        }));
+        console.log(AllInfo[0].listBenefits[0].BenefitIDBenefit);
+        
+
+
+        res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo});
     }
 }

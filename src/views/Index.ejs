@@ -39,7 +39,10 @@
                 <div class="container text-nowrap">
                     <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">🌙</a>
                     <%if(login){%>
-                        <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a><%}%>
+                        <%if(login.Admin == 1){%>
+                            <a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a>
+                            <a  class="btn btn-primary" href="/AdmPage/<%=login.IDUser%>">Pagina do ADM</a>
+                        <%}%>
                         <a  class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UpdateUser">Editar</a>
                         <a  class="btn btn-danger" href="/logout">Deslogar</a>
                     <%}else{%>
