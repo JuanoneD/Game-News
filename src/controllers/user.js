@@ -6,11 +6,25 @@ module.exports = {
     async registerUser(req,res){
         let data = req.body;
 
+        if(!(data.Name || data.Email || data.Password))
+        {
+            renders.renderIndex(res,'Alguns dados não foram preenchidos corretamente',null,null);
+        }
+
         if(data.PasswordConfirm != data.Password){
             renders.renderIndex(res,'As Senhas não coincidem');
             return;
         }
         
+        let UserEmail = await users.findOne({raw: true, attributes: ['Email'], where:{Email: data.Email}});
+
+        if(UserEmail)
+        {
+            renders.renderIndex(res,'Email já cadastrado',null,null);
+            return;
+        }
+
+
         await users.create({
             Name: data.Name,
             Password: createHash('sha256').update(data.Password).digest('hex'),
@@ -45,13 +59,20 @@ module.exports = {
             renders.renderIndex(res, 'Senhas Não Coincidem');
             return;
         }
-
+        
         await users.update({
             Name: data.Name,
-            Password: createHash('sha256').update(data.PasswordNew1).digest('hex'),
             Email: data.Email,
             Admin: data.Admin
         },{where:{IDUser:id_user}});
+
+        if(data.PasswordNew1)
+        {
+            await users.update({
+            Password: createHash('sha256').update(data.PasswordNew1).digest('hex'),
+            },{where:{IDUser:id_user}});
+        }
+        
         res.redirect('/');
     },
     async loginUser(req,res){

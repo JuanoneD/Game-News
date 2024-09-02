@@ -52,9 +52,9 @@
     <main>
         <section class="container shadow" style="margin-top: 3%;padding: 3%;border-radius: 10px;">
             <div class="container text-center">
-                <span class="new-amsterdam-title-2"><%=article.Title%></span>
+                <span class="Text new-amsterdam-title-2"><%=article.Title%></span>
                 <br>
-                <span style="font-size: large;text-justify: auto;"><%=article.Description%></span>
+                <span class="Text" style="font-size: large;text-justify: auto; opacity: 0.8;"><%=article.Description%></span>
                 <br>
             </div>
             <div>
@@ -91,15 +91,25 @@
                 <div>
                     <figure>
                         <blockquote class="blockquote">
-                        <p><%=comment[i].Name%>
+                        <p><%=comment[i].Name%> <span class="CommentDate"><%=comment[i].createdAt%></span>
+                            <%if(comment[i].createdAt != comment[i].updatedAt){%>
+                                <span class="CommentDate">- Editado: <%=comment[i].updatedAt%></span>
+                            <%}%>
                             <%if(login && (comment[i].IDUser == login.IDUser || login.Admin)){%>
                                 <a class="CommentAction" href="/DeleteComment/<%=login.IDUser%>/<%=comment[i].IDComment%>">❌</a>
                             <%}%>
                         </p>
                         </blockquote>
-                        <figcaption class="blockquote-footer" >
-                        <%=comment[i].Description%> 
-                        </figcaption>
+                        <figcaption class="blockquote-footer"><%=comment[i].Description%></figcaption>
+                        <!-- 
+                        <%if(login && comment[i].IDUser == login.IDUser){%>
+                        <div class="input-group mb-3" style="display: none;">
+                            <input type="text" name="Description" class="form-control" value="<%=comment[i].Description%>">
+                            <button class="btn btn-outline-primary" type="submit">Salvar</button>
+                            <button class="btn btn-outline-danger">Cancelar</button>
+                        </div>
+                        <%}%>
+                        -->
                     </figure>
                 </div>
             <%}%>

@@ -77,15 +77,20 @@ module.exports = {
 
         let comment = await comments.findAll({
             raw:true,
-            attributes:['IDComment','Description','User.Name','IDUser'],
+            attributes:['IDComment','Description','User.Name','IDUser','createdAt','updatedAt'],
             include:{
                 model:users
             },
             where:{'IDArticle':id_article}
         });
 
-        article.createdAt = new Date(article.createdAt).toLocaleString('pt-BR', {timeZone: 'UTC'});
-        article.updatedAt = new Date(article.updatedAt).toLocaleString('pt-BR', {timeZone: 'UTC'});
+        article.createdAt = new Date(article.createdAt).toLocaleString('pt-BR');
+        article.updatedAt = new Date(article.updatedAt).toLocaleString('pt-BR');
+
+        comment.forEach((item) =>{
+            item.createdAt = new Date(item.createdAt).toLocaleString('pt-BR');
+            item.updatedAt = new Date(item.updatedAt).toLocaleString('pt-BR');
+        })
 
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
 

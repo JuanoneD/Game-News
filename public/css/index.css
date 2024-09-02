@@ -39,3 +39,11 @@
     text-decoration: none;
     font-size: 16px;
 }
+.CommentDate
+{
+    font-size: 10px;
+}
+.Text
+{
+    word-wrap: break-word;
+}
