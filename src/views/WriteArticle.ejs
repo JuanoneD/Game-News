@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
 </head>
-<body data-bs-theme="light" id="body"></body>
+<body data-bs-theme="light" id="body">
     <header class="shadow">
         <div class="navbar navbar-expand-lg bg-body-tertiary" style="flex-wrap: nowrap;">
             <div class="container-fluid">
@@ -22,7 +22,7 @@
             </div>
             <div class="d-flex" id="Registers">
                 <div class="container text-nowrap">
-                    <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">☀️</a>
+                    <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">🌙</a>
                     <a class="btn btn-primary" href="/<%=login.IDUser%>">Voltar</a>
                     <%if(login){%>
                         <a class="btn btn-danger" href="/Logout">Deslogar</a>
@@ -39,7 +39,7 @@
             </div>
             <div class="mb-3">
                 <label for="Highlight" class="form-label FormText">Destacar Artigo: </label>
-                <input type="checkbox" name="Highlight" <%= edit ? (article.Highlight ? 'checked' : '') : ''%> required class="form-check-input">
+                <input type="checkbox" name="Highlight" <%= edit ? (article.Highlight ? 'checked' : '') : ''%> class="form-check-input">
             </div>
             <div class="mb-3">
                 <img alt="Imagem do Artigo" id="FormImg" class="FormImg form-control">
@@ -52,7 +52,7 @@
             </div>
             <div class="mb-3">
                 <label for="Content" class="form-label FormText">Conteúdo</label>
-                <textarea name="Content" placeholder="Escreva aqui..." rows="30" maxlength="2800" id="Content"
+                <textarea name="Content" placeholder="Escreva aqui..." rows="30" id="Content"
                 class="form-control FormText" required><%= edit ? article.Content : ''%></textarea>
             </div>
             <div class="d-flex align-items-center">

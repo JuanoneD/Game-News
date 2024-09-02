@@ -36,6 +36,11 @@ module.exports = {
             atribues:['IDUser']
         });
 
+        if(article.IDUser != id_user){
+            res.redirect('/' + id_user);
+            return;
+        }
+
         if(req.file)
         {
             const Img = await articles.findByPk
@@ -60,10 +65,7 @@ module.exports = {
         
         fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
-        if(article.IDUser != id_user){
-            res.redirect('/' + id_user);
-            return;
-        }
+        fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
         await articles.update({
             Title: data.Title,

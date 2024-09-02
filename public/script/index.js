@@ -49,3 +49,7 @@ function ChangeFormImg()
         Reader.readAsDataURL(input.files[0]);
     }
 }
+
+function SetIDsub(idSub){
+    document.getElementById('InsertSubBenefit').action+= `${idSub}`;
+}
