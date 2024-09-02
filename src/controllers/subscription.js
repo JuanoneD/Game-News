@@ -1,4 +1,5 @@
 const subscriptions = require('../model/subscriptions');
+const subbene = require('../model/subscriptionsBenefits');
 
 module.exports = {
     async insertSubs(req,res){
@@ -9,7 +10,6 @@ module.exports = {
             Price:data.Price,
             Description:data.Description
         })
-
         res.redirect(`/AdmPage/${id}`);
     }
 }
