@@ -3,11 +3,12 @@ const user = require('../model/user');
 
 module.exports={
     async renderIndex(res,error = null,login = null,message = null){
-
         let articles = await artilcle.findAll({
             raw:true,
+            order:[['createdAt','DESC']],
             attributes: ['IDArticle','Title','Highlight','Image','Content','IDUser','Description']
-        });
+        }
+        );
         res.render('../views/index', {error:error,login:login,message:message,articles:articles})
     },
 };

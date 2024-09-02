@@ -14,7 +14,7 @@
         <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
         <link href="/css/index.css" rel="stylesheet">
 </head>
-<body>
+<body data-bs-theme="light" id="body">
     <!-- Bootsptrap -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -37,6 +37,7 @@
             </div>
             <div class="d-flex" id="Registers">
                 <div class="container text-nowrap">
+                    <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">☀️</a>
                     <%if(login){%>
                         <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a><%}%>
                         <a  class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UpdateUser">Editar</a>
@@ -60,7 +61,7 @@
                 <div class="carousel-inner">
                     <%j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){j++;%>
                         <div class="carousel-item <%=j==1? 'active':''%>">
-                            <a href="#"><img src="/img/<%=articles[i].Image%>" class="d-block w-100"  style="height: 600px;object-fit: cover;background: linear-gradient(white, black); opacity:0.9"></a>
+                            <a href="articles/<%=login?login.IDUser:'0'%>/<%=articles[i].IDArticle%>"><img src="/img/<%=articles[i].Image%>" class="d-block w-100"  style="height: 600px;object-fit: cover;background: linear-gradient(white, black); opacity:0.9"></a>
                             <div class="carousel-caption d-none d-md-block font-weight-bold " style="opacity:1">
                                 <h5 class="new-amsterdam-title"><%=articles[i].Title%></h5>
                                 <p><%=articles[i].Description%></p>
@@ -92,7 +93,7 @@
                             <%=articles[i].Description%>
                         </div>
                         <div class="card-footer">
-                            <a href="/article/<%=articles[i].IDArticle%>/<%=login?login.IDUser:''%>" class="btn btn-primary buttonHover">Abrir Noticia</a>
+                            <a href="articles/<%=login?login.IDUser:'0'%>/<%=articles[i].IDArticle%>" class="btn btn-primary buttonHover">Abrir Noticia</a>
                         </div>
                     </div>
                 </div>
@@ -171,11 +172,11 @@
                         <form method="post"  action="/Update/<%=login.IDUser%>">
                             <div class="mb-3">
                                 <label for="Name" class="form-label">Nome:</label>
-                                <input type="text" class="form-control"  name="Name">
+                                <input type="text" class="form-control"  value="<%=login.Name%>" name="Name">
                             </div>
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Email:</label>
-                                <input type="text" class="form-control"  name="Email">
+                                <input type="text" class="form-control" value="<%=login.Email%>" name="Email">
                             </div>
                             <div class="mb-3">
                                 <label for="Password" class="form-label">Senha Antiga:</label>

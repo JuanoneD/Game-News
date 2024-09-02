@@ -62,6 +62,8 @@ module.exports = {
                 }
             );
         }
+        
+        fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
         fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
 
@@ -70,12 +72,11 @@ module.exports = {
             Highlight: (data.Highlight == 'on' ? true : false),
             Description: data.Description
         },{where: {IDArticle: id_article }});
-
         res.redirect('/' + id_user);
     },
     async deleteArticle(req,res){
-        let id_user = req.params.id;
-        let id_article = req.params.idArticle;
+        let id_user = req.params.user;
+        let id_article = req.params.article;
 
         let article = await articles.findByPk(id_article,{
             raw:true,

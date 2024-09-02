@@ -1,11 +1,20 @@
-
-.new-amsterdam-title {
+.new-amsterdam-title
+{
     font-family: "New Amsterdam", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 200%;
-  }
-
-
-  
-  
+}
+.FormText
+{
+    font-size: large;
+}
+.FormImg
+{
+    width: 50%;
+    aspect-ratio: 1.7;
+    align-self: center;
+    object-fit: cover;
+    overflow: hidden;
+    margin-bottom: 3%;
+}

@@ -11,46 +11,59 @@
     <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
 </head>
-<body>
+<body data-bs-theme="light" id="body"></body>
     <header class="shadow">
         <div class="navbar navbar-expand-lg bg-body-tertiary" style="flex-wrap: nowrap;">
             <div class="container-fluid">
-                <a class="navbar-brand new-amsterdam-title" href="/">
+                <a class="navbar-brand new-amsterdam-title" href="/<%= login.IDUser %>">
                     <img src="https://staging.cohostcdn.org/avatar/378-30af52f7-ed57-4d7d-b754-2c505be4692b-profile.png" alt="" height="60px">
                     Game News
                 </a>
             </div>
             <div class="d-flex" id="Registers">
                 <div class="container text-nowrap">
+                    <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">☀️</a>
+                    <a class="btn btn-primary" href="/<%=login.IDUser%>">Voltar</a>
                     <%if(login){%>
-                        <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a><%}%>
-                        <a  class="btn btn-primary" href="/Update/<%=login.IDUser%>">Editar</a>
-                        <a  class="btn btn-danger" href="/Logout">Deslogar</a>
-                    <%}else{%>
-                        <a class="btn btn-outline-success" data-bs-toggle="modal"  data-bs-target="#LoginInsert" >Criar conta</a>
-                        <a class="btn btn-outline-success" data-bs-toggle="modal"  data-bs-target="#LoginUser" >Login</a>
+                        <a class="btn btn-danger" href="/Logout">Deslogar</a>
                     <%}%>
                 </div>
             </div>
         </div>
     </header>
-    
-    <form method="post" enctype="multipart/form-data">
-        <label for="Title">Título</label>
-        <input type="text" name="Title" placeholder="Título do artigo" maxlength="250" value="<%= edit ? article.Title : ''%>">
-        <label for="Highlight">Destacar Artigo</label>
-        <input type="checkbox" name="Highlight" <%= edit ? (article.Highlight ? 'value="on"' : '') : ''%>>
-        <label for="Description">Descrição</label>
-        <textarea name="Description" placeholder="Escreva aqui..." cols="50" rows="5" maxlength="250"><%= edit ? article.Description : ''%></textarea>
-        <label for="Content">Conteúdo</label>
-        <textarea name="Content" placeholder="Escreva aqui..." cols="200" rows="30" maxlength="2800" id="Content"><%= edit ? article.Content : ''%></textarea>
-        <input type="file" name="Image" accept="image/*">
-        <input type="submit">
-    </form>
-    <%if(edit){%>
-    <a href="/DeleteArticle/<%= login.IDUser %>/<%= article.IDArticle %>" class="btn btn-danger">Deletar artigo</a>
-    <%}%>
-    <script src="/script/article.js"></script>
+    <div class="container mt-5 mb-5 col-md-10">
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="Title" class="form-label FormText">Título: </label>
+                <input type="text" name="Title" placeholder="Título do artigo" maxlength="100" value="<%= edit ? article.Title : ''%>" class="form-control FormText" required>
+            </div>
+            <div class="mb-3">
+                <label for="Highlight" class="form-label FormText">Destacar Artigo: </label>
+                <input type="checkbox" name="Highlight" <%= edit ? (article.Highlight ? 'checked' : '') : ''%> required class="form-check-input">
+            </div>
+            <div class="mb-3">
+                <img alt="Imagem do Artigo" id="FormImg" class="FormImg form-control">
+                <input type="file" id="ImgInput" name="Image" oninput="ChangeFormImg()" accept="image/*" class="form-control FormText" required>
+            </div>
+            <div class="mb-3">
+                <label for="Description" class="form-label FormText">Descrição</label>
+                <textarea name="Description" placeholder="Escreva aqui..." rows="5" maxlength="250"
+                class="form-control FormText" required><%= edit ? article.Description : ''%></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="Content" class="form-label FormText">Conteúdo</label>
+                <textarea name="Content" placeholder="Escreva aqui..." rows="30" maxlength="2800" id="Content"
+                class="form-control FormText" required><%= edit ? article.Content : ''%></textarea>
+            </div>
+            <div class="d-flex align-items-center">
+                <%if(edit){%>
+                <a href="/DeleteArticle/<%= login.IDUser %>/<%= article.IDArticle %>" class="btn btn-danger">Deletar artigo</a>
+                <%}%>
+                <input type="submit" class="btn btn-primary FormText">
+            </div>
+        </form>
+    </div>
+    <script src="/script/index.js"></script>
     
 </body>
 </html>
