@@ -13,13 +13,13 @@ module.exports = {
             Img = req.file.filename;
         }
 
-        const fileName = `${new Date().getTime()}-${data.Title}.txt`;
+        const fileName = `${new Date().getTime()}-${String(data.Title).replace(/[?\/\\:*<>"|]/g, "")}.txt`;
         fs.writeFile("public/articles/" + fileName, data.Content, (err) => {if(err){console.log(err)}});
 
         await articles.create({
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
-            Description: data.Description,
+            Description: String(data.Description).replace(/[\n\r]/g, ""),
             Image: Img,
             Content: fileName,
             IDUser: id_user
@@ -66,7 +66,7 @@ module.exports = {
         if(data.Title != article.Title)
         {
             fs.unlink("public/articles/" + article.Content, (err) => {if(err){console.log(err)}})
-            article.Content = `${new Date().getTime()}-${data.Title}.txt`;
+            article.Content = `${new Date().getTime()}-${String(data.Title).replace(/[?\/\\:*<>"|]/g, "")}.txt`;
         }
         
         fs.writeFile("public/articles/" + article.Content, data.Content, (err) => {if(err){console.log(err)}});
@@ -74,7 +74,7 @@ module.exports = {
         await articles.update({
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
-            Description: data.Description,
+            Description: String(data.Description).replace(/[\n\r]/g, ""),
             Content: article.Content
         },{where: {IDArticle: id_article }});
         res.redirect('/' + id_user);
