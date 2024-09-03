@@ -4,12 +4,12 @@ const comments = require('../model/comment');
 const renders = require('../config/renders');
 const methods = require('../model/methods');
 const benefits = require('../model/benefits');
+const payments = require('../model/payments');
 const subscriptions = require('../model/subscriptions');
 const fs = require('fs');
-const { raw } = require('express');
-const { where } = require('sequelize');
 const Benefits = require('../model/benefits');
 const subscriptionsBenefits = require('../model/subscriptionsBenefits');
+const { Op } = require('sequelize')
 
 module.exports = {
     async pagInicialGet(req, res){
@@ -116,23 +116,23 @@ module.exports = {
 
         let method = await methods.findAll({
             raw:true,
-            atributtes:['IDMethod','Description']
+            attributes:['IDMethod','Description']
         });
 
         let benefit = await benefits.findAll({
             raw:true,
-            atributtes:['IDBenefit','Description']
+            attributes:['IDBenefit','Description']
         });
 
         let subscription = await subscriptions.findAll({
             raw:true,
-            atributtes:['IDSubscription','Description']
+            attributes:['IDSubscription','Description']
         });
 
         // await subscription.forEach(async (sub,index) => {            
         //     let listBenefits = await subscriptionsBenefits.findAll({
         //         raw:true,
-        //         atributtes:['IDBenefit'],
+        //         attributes:['IDBenefit'],
         //         where:{'SubscriptionIDSubscription':sub.IDSubscription}
         //     });
         //     subscription[index].listBenefits = listBenefits;
@@ -141,12 +141,56 @@ module.exports = {
         const AllInfo = await Promise.all(subscription.map(async (subscrip)=>{
             const listBenefits = await subscriptionsBenefits.findAll({
                 raw:true,
-                atributtes:['IDBenefit'],
+                attributes:['IDBenefit'],
                 where : {SubscriptionIDSubscription: subscrip.IDSubscription}
             });
             return{...subscrip,listBenefits};
         }));
 
         res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo});
+    },
+    async pagSubscriptions(req, res)
+    {
+        let id_user = req.params.user;
+        let CurrentSub = await payments.findAll
+        (
+            {
+                raw: true,
+                include: [users, subscriptions],
+                attributes: ["IDSubscription"],
+                where: {IDUser: id_user}
+            }
+        );
+
+        let Subs = await subscriptions.findAll(
+            {
+                raw: true,
+                attributes: ["IDSubscription","Description","Price"]
+            }
+        );
+
+        let Res = await Promise.all(Subs.map(async (Sub)=>
+        {
+            let SubsBen = await subscriptionsBenefits.findAll(
+                {
+                    raw: true,
+                    attributes: ["BenefitIDBenefit"],
+                    where: {SubscriptionIDSubscription: Sub.IDSubscription}
+                }
+            )
+
+            let Benefits = await benefits.findAll(
+                {
+                    raw: true,
+                    attributes: ["IDBenefit", "Description"],
+                    where: {IDBenefit: {[Op.in]: SubsBen.map((item)=>{return item.BenefitIDBenefit;})}}
+                }
+            )
+
+            return {...Sub,Benefits};
+        }))
+        
+        console.log(Res)
+        res.redirect('back');
     }
 }

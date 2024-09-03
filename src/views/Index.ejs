@@ -42,6 +42,8 @@
                         <%if(login.Admin == 1){%>
                             <a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a>
                             <a  class="btn btn-primary" href="/AdmPage/<%=login.IDUser%>">Pagina do ADM</a>
+                        <%}else{%>
+                            <a class="btn btn-success" href="/Subscriptions/<%=login.IDUser%>">Assinar Plano</a>
                         <%}%>
                         <a  class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UpdateUser">Editar</a>
                         <a  class="btn btn-danger" href="/logout">Deslogar</a>

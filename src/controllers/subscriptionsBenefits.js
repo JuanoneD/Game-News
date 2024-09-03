@@ -8,13 +8,14 @@ module.exports = {
 
 
         let subs = await subsBenefits.findAll({
+            raw: true,
             where:{SubscriptionIDSubscription:id,BenefitIDBenefit:data.IDBenefit}
         })
-        if(subs == []){
+
+        if(subs.length != 0){
             res.redirect(`/AdmPage/${id_user}`);
             return;
         }
-
 
         await subsBenefits.create({
             SubscriptionIDSubscription:id,
