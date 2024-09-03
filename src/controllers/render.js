@@ -146,7 +146,6 @@ module.exports = {
             });
             return{...subscrip,listBenefits};
         }));
-        console.log(AllInfo[0].listBenefits[0].BenefitIDBenefit);
         
 
 

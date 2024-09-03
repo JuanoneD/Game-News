@@ -29,9 +29,11 @@ route.get('/DeleteComment/:user/:comment', comment.deleteComment);
 route.get('/articles/:user/:article',render.showArticle);
 
 route.post('/comment/:user/:article',comment.registerComment);
+route.post('/UpdateComment/:id/:comment',comment.updateComment);
 
 route.get('/AdmPage/:user',render.pagAdmPage);
 route.post('/InsertMethod/:user',methods.InsertMethods);
+route.get('/DeleteMethod/:user/:method',methods.UpdateMethods)
 route.post('/InsertSub/:user',subscriptions.insertSubs);
 route.post('/InsertBenefit/:user',benefits.insertBenefits);
 route.post('/InsertSubBenefit/:user/:sub',subscriptionsBenefits.insertSubsBenefits);

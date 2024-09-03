@@ -61,4 +61,13 @@ function SetIDsub(idSub){
 
 function ChangeDeleteComment(id){
     document.getElementById('DeletedCommentButton').href += id;
+    document.getElementById('UpdateCommentForm').action += id;
+    document.getElementById('CommentInput').value = document.getElementById('CommentValue').innerHTML;
+}
+
+function ChangeDeleteADM(method,id_deleted,id_user){
+    let button = document.getElementById('DeletedAdmButton');
+    if(method == 1){
+        button.href = `/DeleteMethod/${id_user}/${id_deleted}`
+    }
 }

@@ -72,7 +72,10 @@
                             <tr>
                                 <td><%=methods[i].IDMethod%></td>
                                 <td><%=methods[i].Description%></td>
-                                <td>📝❌</td>
+                                <td>
+                                    📝
+                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(1,'<%=methods[i].IDMethod%>','<%=login.IDUser%>')">❌</a>
+                                </td>
                             </tr>
                         <%}%>
                     </tbody>
@@ -134,7 +137,12 @@
                                     <%if(j+1<subscriptions[i].listBenefits.length){%>,<%}%>
                                 <%}%>
                             </td>
-                            <td><a data-bs-toggle="modal"  data-bs-target="#RelationInsert" style="cursor:pointer;" onclick="SetIDsub(<%=subscriptions[i].IDSubscription%>)">➕</a>📝❌</td>
+                                <td>
+                                    <a data-bs-toggle="modal"  data-bs-target="#RelationInsert" style="cursor:pointer;" onclick="SetIDsub(<%=subscriptions[i].IDSubscription%>)">➕</a>
+                                    ➖
+                                    📝
+                                    ❌
+                            </td>
                         </tr>
                     <%}%>
                 </tbody>
@@ -144,6 +152,24 @@
 
 
         <!-- Modals -->
+
+        <div class="modal fade" id="Delete" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Excluir</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem Certeza que deseja excluir?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a type="button"  id="DeletedAdmButton" class="btn btn-primary" href="">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade" id="RelationInsert" tabindex="-1">
             <div class="modal-dialog">

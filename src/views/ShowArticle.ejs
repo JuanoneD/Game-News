@@ -96,20 +96,12 @@
                                 <span class="CommentDate">- Editado: <%=comment[i].updatedAt%></span>
                             <%}%>
                             <%if(login && (comment[i].IDUser == login.IDUser || login.Admin)){%>
-                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#DeleteComment" onclick="ChangeDeleteComment(<%=comment[i].IDComment%>)">❌</a>
+                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#UpdateComment" style="cursor: pointer;" onclick="ChangeDeleteComment(<%=comment[i].IDComment%>)">✏</a>
+                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#DeleteComment" style="cursor: pointer;" onclick="ChangeDeleteComment(<%=comment[i].IDComment%>)">❌</a>
                             <%}%>
                         </p>
                         </blockquote>
-                        <figcaption class="blockquote-footer"><%=comment[i].Description%></figcaption>
-                        <!-- 
-                        <%if(login && comment[i].IDUser == login.IDUser){%>
-                        <div class="input-group mb-3" style="display: none;">
-                            <input type="text" name="Description" class="form-control" value="<%=comment[i].Description%>">
-                            <button class="btn btn-outline-primary" type="submit">Salvar</button>
-                            <button class="btn btn-outline-danger">Cancelar</button>
-                        </div>
-                        <%}%>
-                        -->
+                        <figcaption class="blockquote-footer" id="CommentValue"><%=comment[i].Description%></figcaption>
                     </figure>
                 </div>
             <%}%>
@@ -118,6 +110,27 @@
     </main>
 
         <!-- Modals -->
+
+        <div class="modal fade" id="UpdateComment" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Editar comentario</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"  action="/UpdateComment/<%=login?login.IDUser:''%>/" id="UpdateCommentForm">
+                            <div class="mb-3">
+                                <label for="Email" class="form-label" >comentario:</label>
+                                <input type="text" class="form-control"  name="Description" id="CommentInput">
+                            </div>
+                            <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         
         <div class="modal fade" id="DeleteComment" tabindex="-1">
             <div class="modal-dialog">
