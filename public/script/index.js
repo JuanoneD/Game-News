@@ -65,9 +65,29 @@ function ChangeDeleteComment(id){
     document.getElementById('CommentInput').value = document.getElementById('CommentValue').innerHTML;
 }
 
+
+
 function ChangeDeleteADM(method,id_deleted,id_user){
     let button = document.getElementById('DeletedAdmButton');
     if(method == 1){
         button.href = `/DeleteMethod/${id_user}/${id_deleted}`
+    }else if(method == 2){
+        button.href = `/DeleteBenefit/${id_user}/${id_deleted}`
     }
+}
+
+function ChangeUpdateADM(method,id_Updated,id_user){
+    let form = document.getElementById('UpdateForm');
+    if(method==1){
+        let desc = document.getElementById(`MethDesc${id_Updated}`).innerHTML;
+        document.getElementById('UpdataTitle').innerHTML += ' Metodos de Pagamentos'
+        document.getElementById('UpdateInput').value = desc;
+        form.action = `/UpdateMethod/${id_user}/${id_Updated}`
+    }else if(method == 2){
+        let desc = document.getElementById(`BeneDesc${id_Updated}`).innerHTML;
+        document.getElementById('UpdataTitle').innerHTML += ' Beneficios'
+        document.getElementById('UpdateInput').value = desc;
+        form.action = `/UpdateBenefics/${id_user}/${id_Updated}`
+    }
+    
 }

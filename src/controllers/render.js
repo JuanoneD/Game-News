@@ -109,9 +109,13 @@ module.exports = {
             raw:true,
             attributes:['IDUser','Name','Password','Email','Admin']
         })
+        if(!login){
+            res.redirect(`/`);
+            return;
+        }
         if(login.Admin == 0){
             res.redirect(`/${login.IDUser}`);
-            return
+            return;
         }
 
         let method = await methods.findAll({

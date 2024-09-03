@@ -71,9 +71,9 @@
                         <%for(let i=0;i<methods.length;i++){%>
                             <tr>
                                 <td><%=methods[i].IDMethod%></td>
-                                <td><%=methods[i].Description%></td>
+                                <td id="MethDesc<%=methods[i].IDMethod%>"><%=methods[i].Description%></td>
                                 <td>
-                                    📝
+                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(1,'<%=methods[i].IDMethod%>','<%=login.IDUser%>')">📝</a>
                                     <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(1,'<%=methods[i].IDMethod%>','<%=login.IDUser%>')">❌</a>
                                 </td>
                             </tr>
@@ -100,8 +100,11 @@
                         <%for(let i=0;i<benefits.length;i++){%>
                             <tr>
                                 <td><%=benefits[i].IDBenefit%></td>
-                                <td><%=benefits[i].Description%></td>
-                                <td>📝❌</td>
+                                <td id="BeneDesc<%=benefits[i].IDbenefit%>"><%=benefits[i].Description%></td>
+                                <td>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(2,'<%=benefits[i].IDbenefit%>','<%=login.IDUser%>')">📝</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(2,'<%=benefits[i].IDbenefit%>','<%=login.IDUser%>')">❌</a>
+                                </td>
                             </tr>
                         <%}%>
                     </tbody>
@@ -152,6 +155,28 @@
 
 
         <!-- Modals -->
+
+        
+        <div class="modal fade" id="Update" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="UpdataTitle">Editar</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="UpdateForm" action="/InsertBenefit/<%=login.IDUser%>">
+                            <div class="mb-3">
+                                <label for="Email" class="form-label">Descrição:</label>
+                                <input type="text" class="form-control" id="UpdateInput"  name="Description">
+                            </div>
+                            <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="modal fade" id="Delete" tabindex="-1">
             <div class="modal-dialog">

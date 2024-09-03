@@ -33,7 +33,8 @@ route.post('/UpdateComment/:id/:comment',comment.updateComment);
 
 route.get('/AdmPage/:user',render.pagAdmPage);
 route.post('/InsertMethod/:user',methods.InsertMethods);
-route.get('/DeleteMethod/:user/:method',methods.UpdateMethods)
+route.get('/DeleteMethod/:user/:method',methods.DeleteMethods)
+route.post('/UpdateMethod/:user/:method',methods.UpdateMethods)
 route.post('/InsertSub/:user',subscriptions.insertSubs);
 route.post('/InsertBenefit/:user',benefits.insertBenefits);
 route.post('/InsertSubBenefit/:user/:sub',subscriptionsBenefits.insertSubsBenefits);
