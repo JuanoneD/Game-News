@@ -21,7 +21,6 @@ document.addEventListener
 )
 
 function errorclick(){
-    console.log('Rodou');
     document.getElementById('inputerror').click();
 }
 
@@ -58,4 +57,8 @@ function ChangeFormImg()
 
 function SetIDsub(idSub){
     document.getElementById('InsertSubBenefit').action+= `${idSub}`;
+}
+
+function ChangeDeleteComment(id){
+    document.getElementById('DeletedCommentButton').href += id;
 }
