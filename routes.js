@@ -37,6 +37,7 @@ route.get('/DeleteMethod/:user/:method',methods.DeleteMethods)
 route.post('/UpdateMethod/:user/:method',methods.UpdateMethods)
 route.post('/InsertSub/:user',subscriptions.insertSubs);
 route.post('/InsertBenefit/:user',benefits.insertBenefits);
+route.get('/DeleteBenefit/:user/:benefit',benefits.DeleteBenefits);
 route.post('/InsertSubBenefit/:user/:sub',subscriptionsBenefits.insertSubsBenefits);
 
 

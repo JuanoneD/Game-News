@@ -102,8 +102,8 @@
                                 <td><%=benefits[i].IDBenefit%></td>
                                 <td id="BeneDesc<%=benefits[i].IDbenefit%>"><%=benefits[i].Description%></td>
                                 <td>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(2,'<%=benefits[i].IDbenefit%>','<%=login.IDUser%>')">📝</a>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(2,'<%=benefits[i].IDbenefit%>','<%=login.IDUser%>')">❌</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(2,'<%=benefits[i].IDBenefit%>','<%=login.IDUser%>')">📝</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(2,'<%=benefits[i].IDBenefit%>','<%=login.IDUser%>')">❌</a>
                                 </td>
                             </tr>
                         <%}%>

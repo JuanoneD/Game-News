@@ -89,5 +89,4 @@ function ChangeUpdateADM(method,id_Updated,id_user){
         document.getElementById('UpdateInput').value = desc;
         form.action = `/UpdateBenefics/${id_user}/${id_Updated}`
     }
-    
 }
