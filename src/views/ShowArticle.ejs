@@ -96,7 +96,7 @@
                                 <span class="CommentDate">- Editado: <%=comment[i].updatedAt%></span>
                             <%}%>
                             <%if(login && (comment[i].IDUser == login.IDUser || login.Admin)){%>
-                                <a class="CommentAction" href="/DeleteComment/<%=login.IDUser%>/<%=comment[i].IDComment%>">❌</a>
+                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#DeleteComment" onclick="ChangeDeleteComment(<%=comment[i].IDComment%>)">❌</a>
                             <%}%>
                         </p>
                         </blockquote>
@@ -118,6 +118,26 @@
     </main>
 
         <!-- Modals -->
+        
+        <div class="modal fade" id="DeleteComment" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Excluir</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem Certeza que deseja excluir?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a type="button"  id="DeletedCommentButton" class="btn btn-primary" href="/DeleteComment/<%=login?login.IDUser:''%>/">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="modal fade" id="LoginUser" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
