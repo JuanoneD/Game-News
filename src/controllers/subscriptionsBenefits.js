@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const subsBenefits = require('../model/subscriptionsBenefits');
 
 module.exports = {

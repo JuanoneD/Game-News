@@ -146,9 +146,6 @@ module.exports = {
             });
             return{...subscrip,listBenefits};
         }));
-        console.log(AllInfo[0].listBenefits[0].BenefitIDBenefit);
-        
-
 
         res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo});
     }

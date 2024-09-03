@@ -8,6 +8,7 @@ const user = require('./src/controllers/user');
 const article = require('./src/controllers/article');
 const comment = require('./src/controllers/comment');
 const methods = require('./src/controllers/methods');
+const payments = require('./src/controllers/payments');
 const subscriptions = require('./src/controllers/subscription');
 const benefits = require('./src/controllers/benefits');
 const subscriptionsBenefits = require('./src/controllers/subscriptionsBenefits');

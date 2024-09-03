@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 const Users = require('./user');
 const Methods = require('./methods');
+const Subscriptions = require('./subscriptions')
 
 const Payments = db.define('Payments',{
     IDPayment:
@@ -11,7 +12,7 @@ const Payments = db.define('Payments',{
         allowNull: false,
         primaryKey: true,
     },
-    StarDate:{
+    StartDate:{
         type: Sequelize.DATE,
         allowNull: false
     },
@@ -25,17 +26,17 @@ const Payments = db.define('Payments',{
     },
 });
 
-Payments.belongTo(Users,{
+Payments.belongsTo(Users,{
     constraint: true,
     foreignKey: 'IDUser'
 });
 
-Payments.belongTo(Methods,{
+Payments.belongsTo(Methods,{
     constraint: true,
     foreignKey: 'IDMethod'
 });
 
-Payments.belongTo(Subscriptions,{
+Payments.belongsTo(Subscriptions,{
     constraint: true,
     foreignKey: 'IDSubscription'
 });
