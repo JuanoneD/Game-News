@@ -141,7 +141,7 @@ module.exports = {
         const AllInfo = await Promise.all(subscription.map(async (subscrip)=>{
             const listBenefits = await subscriptionsBenefits.findAll({
                 raw:true,
-                attributes:['IDBenefit'],
+                attributes:['BenefitIDBenefit'],
                 where : {SubscriptionIDSubscription: subscrip.IDSubscription}
             });
             return{...subscrip,listBenefits};
@@ -152,6 +152,12 @@ module.exports = {
     async pagSubscriptions(req, res)
     {
         let id_user = req.params.user;
+
+        let login = await users.findByPk(id_user,{
+            raw:true,
+            attributes:['IDUser','Name','Password','Email','Admin']
+        })
+
         let CurrentSub = await payments.findAll
         (
             {
@@ -187,10 +193,14 @@ module.exports = {
                 }
             )
 
-            return {...Sub,Benefits};
+            return [...Benefits];
         }))
-        
-        console.log(Res)
-        res.redirect('back');
+
+        for(let i = 0; i < Subs.length; ++i)
+        {
+            Subs[i].Benefits = JSON.stringify(Res[i]);
+        }
+
+        res.render('../views/Subscriptions', {CurrentSub,Subs,login});
     }
 }
