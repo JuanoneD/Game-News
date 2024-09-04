@@ -109,9 +109,13 @@ module.exports = {
             raw:true,
             attributes:['IDUser','Name','Password','Email','Admin']
         })
+        if(!login){
+            res.redirect(`/`);
+            return;
+        }
         if(login.Admin == 0){
             res.redirect(`/${login.IDUser}`);
-            return
+            return;
         }
 
         let method = await methods.findAll({
@@ -139,13 +143,22 @@ module.exports = {
         // })
 
         const AllInfo = await Promise.all(subscription.map(async (subscrip)=>{
-            const listBenefits = await subscriptionsBenefits.findAll({
+            const listBenefits  = await subscriptionsBenefits.findAll({
                 raw:true,
-                atributtes:['IDBenefit'],
+                attributes:['SubscriptionIDSubscription','BenefitIDBenefit'],
                 where : {SubscriptionIDSubscription: subscrip.IDSubscription}
             });
-            return{...subscrip,listBenefits};
+
+            let listName = await Promise.all(listBenefits.map(async(bene)=>{
+                const allIn = await benefits.findByPk(bene.BenefitIDBenefit,{
+                    raw:true
+                })
+                return{...bene,nameBenefits:allIn.Description}
+            }))
+            return{...subscrip,listBenefits:listName};
         }));
+        
+        console.log(AllInfo[0].listBenefits[0]);
 
         res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo});
     }

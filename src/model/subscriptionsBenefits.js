@@ -12,8 +12,8 @@ const SubscriptionsBenefits = db.define('SubscriptionsBenefits',{
     }
 });
 
-Subscriptions.belongsToMany(Benefits,{through:'SubscriptionsBenefits'});
-Benefits.belongsToMany(Subscriptions,{through:'SubscriptionsBenefits'});
+Subscriptions.belongsToMany(Benefits,{through:SubscriptionsBenefits});
+Benefits.belongsToMany(Subscriptions,{through:SubscriptionsBenefits});
 
 
 module.exports = SubscriptionsBenefits;
