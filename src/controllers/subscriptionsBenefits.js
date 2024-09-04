@@ -22,5 +22,15 @@ module.exports = {
         });
         
         res.redirect(`/AdmPage/${id_user}`);
+    },
+    async DeleteRelation(req,res){
+        let id_user = req.params.user;
+        let data = req.body;
+
+        await subsBenefits.destroy({
+            where:{IDSubscriptionsBenefits:data.IDSubscriptionsBenefits}
+        });
+
+        res.redirect(`/AdmPage/${id_user}`);
     }
 }
