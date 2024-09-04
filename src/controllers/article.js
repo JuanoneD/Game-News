@@ -6,6 +6,8 @@ module.exports = {
     async registerArticle(req,res){
         let data =  req.body;
         let id_user = req.params.user;
+
+        console.log(data);
         
         let Img = '';
         if(req.file)
@@ -22,7 +24,8 @@ module.exports = {
             Description: String(data.Description).replace(/[\n\r]/g, ""),
             Image: Img,
             Content: fileName,
-            IDUser: id_user
+            IDUser: id_user,
+            IDBenefit: (data.IDBenefit==0?null:data.IDBenefit)
         });
         res.redirect("/" + id_user);
     },
@@ -75,7 +78,8 @@ module.exports = {
             Title: data.Title,
             Highlight: (data.Highlight == 'on' ? true : false),
             Description: String(data.Description).replace(/[\n\r]/g, ""),
-            Content: article.Content
+            Content: article.Content,
+            IDBenefit:(data.IDBenefit==0?null:data.IDBenefit)
         },{where: {IDArticle: id_article }});
         res.redirect('/' + id_user);
     },

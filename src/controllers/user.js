@@ -49,7 +49,6 @@ module.exports = {
 
         if(OldPassword.Password != createHash('sha256').update(data.Password).digest('hex'))
         {
-            console.log(createHash('sha256').update(data.Password).digest('hex'));
             renders.renderIndex(res, 'Senha Errada',OldPassword);
             return;
         }

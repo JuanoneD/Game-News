@@ -127,7 +127,7 @@ function UpdateRelation(data){
     let value = JSON.parse(data);
     let selection = document.getElementById('IdSelecRelation');
     
-    let text = '<option value="0">Selecionar uma opção</option>';
+    let text = '<option value="0" hidden>Selecionar uma opção</option>';
     for(let i=0;i<value.length;i++){
         text +=`<option value="${value[i].IDSubscriptionsBenefits}">${value[i].nameBenefits}</option>`
     }   

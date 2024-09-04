@@ -22,7 +22,6 @@ module.exports = {
                 attributes:['IDUser','Name','Password','Email','Admin']
             });
         }
-        console.log(login);
         renders.renderIndex(res,null,login);
     },
     async pagWriteArticle(req,res){
@@ -38,7 +37,13 @@ module.exports = {
             res.redirect(`/${id}`);
             return;
         }
-        res.render('../views/WriteArticle',{login,error: '',edit:false,article:null});
+        
+        let benefit = await benefits.findAll({
+            raw:true,
+            atributtes:['IDBenefit','Description']
+        });
+
+        res.render('../views/WriteArticle',{login,error: '',edit:false,article:null,benefits:benefit});
     },
     async pagEditArticle(req,res){
         let id_user = req.params.user;
@@ -54,16 +59,21 @@ module.exports = {
 
         let article = await articles.findByPk(id_article,{
             raw:true,
-            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser']
+            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','IDBenefit']
         });
 
         if(login.Admin == 0 || login.IDUser != article.IDUser){
             res.redirect(`/${id_user}`);
             return;
         }
+
+        let benefit = await benefits.findAll({
+            raw:true,
+            atributtes:['IDBenefit','Description']
+        });
         
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
-        res.render('../views/WriteArticle',{login,error: '',edit:true,article:article});
+        res.render('../views/WriteArticle',{login,error: '',edit:true,article:article,benefits:benefit});
     },
     async showArticle(req,res){
         let id_user = req.params.user;
