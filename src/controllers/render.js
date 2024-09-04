@@ -175,7 +175,7 @@ module.exports = {
             }
         );
 
-        let Res = await Promise.all(Subs.map(async (Sub)=>
+        Subs = await Promise.all(Subs.map(async (Sub)=>
         {
             let SubsBen = await subscriptionsBenefits.findAll(
                 {
@@ -193,13 +193,8 @@ module.exports = {
                 }
             )
 
-            return [...Benefits];
+            return {...Sub,Benefits:[...Benefits]};
         }))
-
-        for(let i = 0; i < Subs.length; ++i)
-        {
-            Subs[i].Benefits = JSON.stringify(Res[i]);
-        }
 
         res.render('../views/Subscriptions', {CurrentSub,Subs,login});
     }
