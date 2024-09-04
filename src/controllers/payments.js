@@ -6,11 +6,18 @@ module.exports =
     async InsertPayment(req, res)
     {
         let id_user = req.params.user;
+        let id_sub = req.params.subscription;
         let data = req.body;
+
+        if(!data.Method)
+        {
+            res.redirect("back");
+            return;
+        }
 
         let subscription = await subscrip.findByPk
         (
-            data.Subscription,
+            id_sub,
             {
                 raw: true,
                 attributes: ['Price']
@@ -18,7 +25,7 @@ module.exports =
         );
 
         let StartDate = new Date(Date.now());
-        let EndDate = StartDate;
+        let EndDate = new Date(StartDate);
 
         EndDate.setDate(EndDate.getDate() + 30);
 
@@ -30,7 +37,7 @@ module.exports =
                 Value: subscription.Price,
                 IDUser: id_user,
                 IDMethod: data.Method,
-                IDSubscription: data.Subscription
+                IDSubscription: id_sub
             }
         )
 
