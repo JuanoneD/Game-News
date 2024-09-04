@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const User = require('./user');
 const db = require('../config/db');
-const Subscription = require('./subscriptions');
+const Benefits = require('./benefits');
 const Article = db.define("Articles",
     {
         IDArticle:
@@ -49,10 +49,10 @@ Article.belongsTo
 );
 Article.belongsTo
 (
-    Subscription,
+    Benefits,
     {
         constraint: true,
-        foreignKey: 'IDSubscription'
+        foreignKey: 'IDBenefit'
     }
 )
 module.exports = Article;

@@ -227,7 +227,7 @@
                         <form method="post" id="InsertSubBenefit" action="/InsertSubBenefit/<%=login.IDUser%>/">
                             <label for="Select" class="form-label p-2">Beneficio:</label>
                             <select id="Select" name="IDBenefit" class="form-select">
-                                <option value="">Selecionar uma opção</option>
+                                <option value="" hidden>Selecionar uma opção</option>
                                 <% for(let i=0;i<benefits.length;i++){%>
                                     <option value='<%=benefits[i].IDBenefit%>'%>> <%= benefits[i].Description %></option>
                                 <% } %>

@@ -87,21 +87,20 @@
         <section class="container card-group container" style="margin-top: 2%;">
     
             <%j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 0){j++;%>
-                <div class="container col-sm-4 col-lg-4 shadow" style="margin-top: 2%;">
-                    <div class="card text-center" style="height: 98%;padding: 5%;">
-                        <div class="card-header new-amsterdam-title">
-                            <%=articles[i].Title%>
+                <div class="container col-sm-12 col-md-6 col-lg-4" style="margin-top: 2%;">
+                    <a href="articles/<%=login?login.IDUser:'0'%>/<%=articles[i].IDArticle%>" style="text-decoration:none;">
+                        <div class="card text-center" style="height: 98%;padding: 5%;">
+                            <div class="card-header new-amsterdam-title" style="font-size: 160%;">
+                                <%=articles[i].Title%>
+                            </div>
+                            <div>
+                                <img src="/img/<%=articles[i].Image%>" class="card-img-top" style="height: 200px;object-fit: cover;">
+                            </div>
+                            <div class="card-body">
+                                <%=articles[i].Description%>
+                            </div>
                         </div>
-                        <div>
-                            <img src="/img/<%=articles[i].Image%>" class="card-img-top" style="height: 200px;object-fit: cover;">
-                        </div>
-                        <div class="card-body">
-                            <%=articles[i].Description%>
-                        </div>
-                        <div class="card-footer">
-                            <a href="articles/<%=login?login.IDUser:'0'%>/<%=articles[i].IDArticle%>" class="btn btn-primary buttonHover">Abrir Noticia</a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             <%}}%>
 

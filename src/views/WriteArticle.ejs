@@ -51,6 +51,15 @@
                 class="form-control FormText" required><%= edit ? article.Description : ''%></textarea>
             </div>
             <div class="mb-3">
+                <label for="Content" class="form-label FormText">Beneficio</label>
+                <select id="Select" name="IDBenefit" class="form-select">
+                    <option value="">Selecionar uma opção</option>
+                    <% for(let i=0;i<benefits.length;i++){%>
+                        <option value='<%=benefits[i].IDBenefit%>' <%if(article){%><%=benefits[i].IDBenefit == article.IDBenefit?'selected':''%><% } %>> <%= benefits[i].Description %></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="Content" class="form-label FormText">Conteúdo</label>
                 <textarea name="Content" placeholder="Escreva aqui..." rows="30" id="Content"
                 class="form-control FormText" required><%= edit ? article.Content : ''%></textarea>
