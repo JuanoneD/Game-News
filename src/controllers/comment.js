@@ -20,6 +20,7 @@ module.exports = {
         let id_user = req.params.id;
         let id_comment = req.params.comment;
         let data = req.body;
+
         
         let comment = await comments.findByPk(id_comment,{
             raw:true,
@@ -32,12 +33,12 @@ module.exports = {
         })
 
         if(!comment || !user){
-            res.redirect(`/`,{error:'NoPermission'}); /// change to the link for articles
+            res.redirect(`/`); /// change to the link for articles
             return;
         }
         
-        if(comment.IDUser != id_user || user.Admin != 1){
-            res.redirect(`/Articles/${id_artice}`,{error:'NoPermission'}); /// change to the link for articles
+        if(comment.IDUser != id_user){
+            res.redirect(`/Articles/${id_user}/${comment.IDArticle}`); /// change to the link for articles
             return;
         }
         

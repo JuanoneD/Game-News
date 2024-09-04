@@ -95,10 +95,13 @@
                             <%if(comment[i].createdAt != comment[i].updatedAt){%>
                                 <span class="CommentDate">- Editado: <%=comment[i].updatedAt%></span>
                             <%}%>
-                            <%if(login && (comment[i].IDUser == login.IDUser || login.Admin)){%>
+                            <%if(login && (comment[i].IDUser == login.IDUser)){%>
                                 <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#UpdateComment" style="cursor: pointer;" onclick="ChangeDeleteComment('<%=comment[i].IDComment%>')">✏</a>
                                 <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#DeleteComment" style="cursor: pointer;" onclick="ChangeDeleteComment('<%=comment[i].IDComment%>')">❌</a>
-                            <%}%>
+                            <%}else {%>
+                            <%if(login && (login.Admin)){%>
+                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#DeleteComment" style="cursor: pointer;" onclick="ChangeDeleteComment('<%=comment[i].IDComment%>')">❌</a>
+                            <%}}%>
                         </p>
                         </blockquote>
                         <figcaption class="blockquote-footer" id="CommentValue"><%=comment[i].Description%></figcaption>
