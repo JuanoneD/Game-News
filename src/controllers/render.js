@@ -140,7 +140,7 @@ module.exports = {
 
         let subscription = await subscriptions.findAll({
             raw:true,
-            attributes:['IDSubscription','Description']
+            attributes:['IDSubscription','Description','Price']
         });
 
         // await subscription.forEach(async (sub,index) => {            
@@ -155,7 +155,7 @@ module.exports = {
         const AllInfo = await Promise.all(subscription.map(async (subscrip)=>{
             const listBenefits  = await subscriptionsBenefits.findAll({
                 raw:true,
-                attributes:['BenefitIDBenefit'],
+                attributes:['BenefitIDBenefit','IDSubscriptionsBenefits'],
                 where : {SubscriptionIDSubscription: subscrip.IDSubscription}
             });
 

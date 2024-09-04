@@ -27,6 +27,8 @@ module.exports = {
         let id_user = req.params.user;
         let data = req.body;
 
+        console.log(data);
+
         await subsBenefits.destroy({
             where:{IDSubscriptionsBenefits:data.IDSubscriptionsBenefits}
         });

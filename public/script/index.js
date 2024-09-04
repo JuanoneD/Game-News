@@ -80,7 +80,6 @@ function ChangeDeleteADM(method,id_deleted,id_user){
 }
 
 function ChangeUpdateADM(method,id_Updated,id_user){
-
     let form = document.getElementById('UpdateForm');
     if(method==1){
         let desc = document.getElementById(`MethDesc${id_Updated}`).innerHTML;
@@ -126,6 +125,7 @@ function UpdateRelation(data){
 
     let value = JSON.parse(data);
     let selection = document.getElementById('IdSelecRelation');
+    console.log(value);
     
     let text = '<option value="0" hidden>Selecionar uma opção</option>';
     for(let i=0;i<value.length;i++){
