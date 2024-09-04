@@ -100,7 +100,7 @@
                         <%for(let i=0;i<benefits.length;i++){%>
                             <tr>
                                 <td><%=benefits[i].IDBenefit%></td>
-                                <td id="BeneDesc<%=benefits[i].IDbenefit%>"><%=benefits[i].Description%></td>
+                                <td id="BeneDesc<%=benefits[i].IDBenefit%>"><%=benefits[i].Description%></td>
                                 <td>
                                     <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(2,'<%=benefits[i].IDBenefit%>','<%=login.IDUser%>')">📝</a>
                                     <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(2,'<%=benefits[i].IDBenefit%>','<%=login.IDUser%>')">❌</a>
@@ -132,8 +132,8 @@
                     <%for(let i=0;i<subscriptions.length;i++){%>
                         <tr>
                             <td><%=subscriptions[i].IDSubscription%></td>
-                            <td><%=subscriptions[i].Description%></td>
-                            <td><%=subscriptions[i].Price%></td>
+                            <td id="SubsDesc<%=subscriptions[i].IDSubscription%>"><%=subscriptions[i].Description%></td>
+                            <td id="SubsPrice<%=subscriptions[i].IDSubscription%>"><%=subscriptions[i].Price%></td>
                             <td>
                                 <%for(let j=0;j<subscriptions[i].listBenefits.length;j++){%>
                                     <%=subscriptions[i].listBenefits[j].BenefitIDBenefit%>
@@ -141,10 +141,10 @@
                                 <%}%>
                             </td>
                                 <td>
-                                    <a data-bs-toggle="modal"  data-bs-target="#RelationInsert" style="cursor:pointer;" onclick="SetIDsub(<%=subscriptions[i].IDSubscription%>)">➕</a>
-                                    ➖
-                                    📝
-                                    ❌
+                                    <a data-bs-toggle="modal"  data-bs-target="#RelationInsert" style="cursor:pointer;" onclick="SetIDsub('<%=subscriptions[i].IDSubscription%>')">➕</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#RelationDestroy" style="cursor:pointer;" onclick="UpdateRelation('<%=JSON.stringify(subscriptions[i].listBenefits)%>')">➖</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(3,'<%=subscriptions[i].IDSubscription%>','<%=login.IDUser%>')">📝</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(3,'<%=subscriptions[i].IDSubscription%>','<%=login.IDUser%>')">❌</a>
                             </td>
                         </tr>
                     <%}%>
@@ -155,6 +155,30 @@
 
 
         <!-- Modals -->
+
+
+        <div class="modal fade" id="RelationDestroy" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Remover Beneficio na assinatura</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/InsertSubBenefit/<%=login.IDUser%>/">
+                            <label for="Select" class="form-label p-2">Beneficio:</label>
+                            <select name="IDBenefit" class="form-select">
+                                <option value="0">Selecionar uma opção</option>
+                                <% for(let i=0;i<benefits.length;i++){%>
+                                    <option value='<%=benefits[i].IDBenefit%>'%>> <%= benefits[i].Description %></option>
+                                <% } %>
+                            </select>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2%;">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         
         <div class="modal fade" id="Update" tabindex="-1">

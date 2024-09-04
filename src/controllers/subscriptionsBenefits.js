@@ -12,11 +12,10 @@ module.exports = {
             raw:true,
             where:{SubscriptionIDSubscription:id,BenefitIDBenefit:data.IDBenefit}
         })
-        if(subs.length != 0){
+        if(subs.length != 0 || data.IDBenefit == 0){
             res.redirect(`/AdmPage/${id_user}`);
             return;
         }
-
 
         await subsBenefits.create({
             SubscriptionIDSubscription:id,

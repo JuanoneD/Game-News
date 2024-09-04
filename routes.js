@@ -36,7 +36,10 @@ route.post('/InsertMethod/:user',methods.InsertMethods);
 route.get('/DeleteMethod/:user/:method',methods.DeleteMethods)
 route.post('/UpdateMethod/:user/:method',methods.UpdateMethods)
 route.post('/InsertSub/:user',subscriptions.insertSubs);
+route.get('/DeleteSubscription/:user/:subs',subscriptions.DeleteSubs);
+route.post('/UpdateSubs/:user/:subs',subscriptions.UpdateSubs);
 route.post('/InsertBenefit/:user',benefits.insertBenefits);
+route.post('/UpdateBenefics/:user/:benefit',benefits.UpdateBenefits);
 route.get('/DeleteBenefit/:user/:benefit',benefits.DeleteBenefits);
 route.post('/InsertSubBenefit/:user/:sub',subscriptionsBenefits.insertSubsBenefits);
 

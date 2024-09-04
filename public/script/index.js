@@ -56,6 +56,7 @@ function ChangeFormImg()
 }
 
 function SetIDsub(idSub){
+    console.log(idSub);
     document.getElementById('InsertSubBenefit').action+= `${idSub}`;
 }
 
@@ -73,20 +74,57 @@ function ChangeDeleteADM(method,id_deleted,id_user){
         button.href = `/DeleteMethod/${id_user}/${id_deleted}`
     }else if(method == 2){
         button.href = `/DeleteBenefit/${id_user}/${id_deleted}`
+    }else if(method==3){
+        button.href = `/DeleteSubscription/${id_user}/${id_deleted}`
     }
 }
 
 function ChangeUpdateADM(method,id_Updated,id_user){
+
     let form = document.getElementById('UpdateForm');
     if(method==1){
         let desc = document.getElementById(`MethDesc${id_Updated}`).innerHTML;
-        document.getElementById('UpdataTitle').innerHTML += ' Metodos de Pagamentos'
-        document.getElementById('UpdateInput').value = desc;
+        document.getElementById('UpdataTitle').innerHTML = 'Editar Metodos de Pagamentos'
+        form.innerHTML = `
+        <div class="mb-3">
+            <label for="Email" class="form-label">Descrição:</label>
+            <input type="text" class="form-control" id="UpdateInput" value="${desc}" name="Description">
+        </div>
+        <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
+        `
         form.action = `/UpdateMethod/${id_user}/${id_Updated}`
-    }else if(method == 2){
+    }else if(method==2){
         let desc = document.getElementById(`BeneDesc${id_Updated}`).innerHTML;
-        document.getElementById('UpdataTitle').innerHTML += ' Beneficios'
-        document.getElementById('UpdateInput').value = desc;
+        document.getElementById('UpdataTitle').innerHTML = 'Editar Beneficios'
+        form.innerHTML = `
+        <div class="mb-3">
+            <label for="Email" class="form-label">Descrição:</label>
+            <input type="text" class="form-control" id="UpdateInput" value="${desc}" name="Description">
+        </div>
+        <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
+        `;
         form.action = `/UpdateBenefics/${id_user}/${id_Updated}`
+    }else if(method==3){
+        let desc = document.getElementById(`SubsDesc${id_Updated}`).innerHTML;
+        let price = document.getElementById(`SubsPrice${id_Updated}`).innerHTML;
+        form.innerHTML = `
+        <div class="mb-3">
+            <label for="Email" class="form-label">Descrição:</label>
+            <input type="text" class="form-control" id="UpdateInput" value="${desc}" name="Description">
+        </div>
+        <div class="mb-3">
+            <label for="Email" class="form-label">Valor:</label>
+            <input type="Number" class="form-control" id="UpdatePrice" value="${price}" step="0.01" name="Price">
+        </div>
+        <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
+        `
+        document.getElementById('UpdataTitle').innerHTML = 'Editar Assinaturas'
+        form.action = `/UpdateSubs/${id_user}/${id_Updated}`
+    }
+}
+function UpdateRelation(data){
+    let value = JSON.parse(data);
+    for(let i=0;i<value.length;i++){
+        
     }
 }

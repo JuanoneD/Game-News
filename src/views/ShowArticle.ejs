@@ -96,8 +96,8 @@
                                 <span class="CommentDate">- Editado: <%=comment[i].updatedAt%></span>
                             <%}%>
                             <%if(login && (comment[i].IDUser == login.IDUser || login.Admin)){%>
-                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#UpdateComment" style="cursor: pointer;" onclick="ChangeDeleteComment(<%=comment[i].IDComment%>)">✏</a>
-                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#DeleteComment" style="cursor: pointer;" onclick="ChangeDeleteComment(<%=comment[i].IDComment%>)">❌</a>
+                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#UpdateComment" style="cursor: pointer;" onclick="ChangeDeleteComment('<%=comment[i].IDComment%>')">✏</a>
+                                <a class="CommentAction" data-bs-toggle="modal"  data-bs-target="#DeleteComment" style="cursor: pointer;" onclick="ChangeDeleteComment('<%=comment[i].IDComment%>')">❌</a>
                             <%}%>
                         </p>
                         </blockquote>
