@@ -165,15 +165,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="/InsertSubBenefit/<%=login.IDUser%>/">
+                        <form method="post" action="/DeleteRelation/<%=login.IDUser%>/">
                             <label for="Select" class="form-label p-2">Beneficio:</label>
-                            <select name="IDBenefit" class="form-select">
-                                <option value="0">Selecionar uma opção</option>
-                                <% for(let i=0;i<benefits.length;i++){%>
-                                    <option value='<%=benefits[i].IDBenefit%>'%>> <%= benefits[i].Description %></option>
-                                <% } %>
+                            <select name="IDSubscriptionsBenefits" id="IdSelecRelation" class="form-select">
                             </select>
-                            <button type="submit" class="btn btn-primary" style="margin-top: 2%;">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2%;">Remover</button>
                         </form>
                     </div>
                 </div>
@@ -236,7 +232,7 @@
                                     <option value='<%=benefits[i].IDBenefit%>'%>> <%= benefits[i].Description %></option>
                                 <% } %>
                             </select>
-                            <button type="submit" class="btn btn-primary" style="margin-top: 2%;">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2%;">Adicionar</button>
                         </form>
                     </div>
                 </div>

@@ -145,7 +145,6 @@ module.exports = {
         const AllInfo = await Promise.all(subscription.map(async (subscrip)=>{
             const listBenefits  = await subscriptionsBenefits.findAll({
                 raw:true,
-                attributes:['SubscriptionIDSubscription','BenefitIDBenefit'],
                 where : {SubscriptionIDSubscription: subscrip.IDSubscription}
             });
 

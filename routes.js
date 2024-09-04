@@ -42,6 +42,7 @@ route.post('/InsertBenefit/:user',benefits.insertBenefits);
 route.post('/UpdateBenefics/:user/:benefit',benefits.UpdateBenefits);
 route.get('/DeleteBenefit/:user/:benefit',benefits.DeleteBenefits);
 route.post('/InsertSubBenefit/:user/:sub',subscriptionsBenefits.insertSubsBenefits);
+route.post('/DeleteRelation/:user',subscriptionsBenefits.DeleteRelation);
 
 
 
