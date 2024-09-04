@@ -62,3 +62,12 @@ function SetIDsub(idSub){
 function ChangeDeleteComment(id){
     document.getElementById('DeletedCommentButton').href += id;
 }
+
+function PaymentModal(Sub, User)
+{
+    Sub = JSON.parse(Sub);
+
+    document.getElementById('InsertPayment').action = `/InsertPayment/${User}/${Sub.IDSubscription}`;
+    document.getElementById('PaymentValue').innerHTML = Sub.Price.toFixed(2);
+    document.getElementById('PaymentSub').innerHTML = Sub.Description;
+}

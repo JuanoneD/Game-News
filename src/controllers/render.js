@@ -162,11 +162,21 @@ module.exports = {
         (
             {
                 raw: true,
-                include: [users, subscriptions],
-                attributes: ["IDSubscription"],
+                include: [{model: users, required: true}, {model: subscriptions, required: true}],
+                attributes: ["IDSubscription","StartDate","EndDate"],
                 where: {IDUser: id_user}
             }
         );
+        
+        console.log(CurrentSub);
+        CurrentSub = CurrentSub.map((item)=>{
+            if(Date.now() >= new Date(item.StartDate).getTime() && Date.now() <= new Date(item.EndDate).getTime())
+            {
+                return item.IDSubscription;
+            }
+        });
+
+        console.log(CurrentSub);
 
         let Subs = await subscriptions.findAll(
             {
@@ -196,6 +206,8 @@ module.exports = {
             return {...Sub,Benefits:[...Benefits]};
         }))
 
-        res.render('../views/Subscriptions', {CurrentSub,Subs,login});
+        let Methods = await methods.findAll({raw:true, attributes: ['IDMethod','Description']})
+
+        res.render('../views/Subscriptions', {CurrentSub,Subs,login,Methods});
     }
 }
