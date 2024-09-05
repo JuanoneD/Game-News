@@ -3,7 +3,7 @@ const comments = require('../model/comment');
 
 module.exports = {
     async registerComment(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_article = req.params.article;
 
         let data = req.body;
@@ -17,7 +17,7 @@ module.exports = {
         res.redirect(`/Articles/${id_user}/${id_article}`); /// change to the link for articles
     },
     async updateComment(req,res){
-        let id_user = req.params.id;
+        let id_user = req.session.IDUser;
         let id_comment = req.params.comment;
         let data = req.body;
 
@@ -48,7 +48,7 @@ module.exports = {
         res.redirect(`/Articles/${id_user}/${comment.IDArticle}`); /// change to the link for articles
     },
     async deleteComment(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_comment = req.params.comment;
         
         let comment = await comments.findByPk(id_comment,{

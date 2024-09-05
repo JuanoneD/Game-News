@@ -36,7 +36,7 @@ module.exports = {
     },
     async UpdateUser(req,res){
         let data = req.body;
-        let id_user = req.params.id;
+        let id_user = req.session.IDUser;
 
         OldPassword = await users.findByPk
         (

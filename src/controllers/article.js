@@ -5,7 +5,7 @@ const fs = require('fs');
 module.exports = {
     async registerArticle(req,res){
         let data =  req.body;
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
 
         console.log(data);
         
@@ -30,7 +30,7 @@ module.exports = {
         res.redirect("/" + id_user);
     },
     async updateArticle(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_article = req.params.article;
         let data = req.body;
 
@@ -84,7 +84,7 @@ module.exports = {
         res.redirect('/' + id_user);
     },
     async deleteArticle(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_article = req.params.article;
 
         let article = await articles.findByPk(id_article,{

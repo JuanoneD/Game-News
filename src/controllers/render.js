@@ -13,7 +13,7 @@ const { Op } = require('sequelize')
 
 module.exports = {
     async pagInicialGet(req, res){
-        let id = req.params.id;
+        let id = req.session.IDUser;
         let login = null;
         console.log(id);
         if(Number(id)){
@@ -25,7 +25,7 @@ module.exports = {
         renders.renderIndex(res,null,login);
     },
     async pagWriteArticle(req,res){
-        let id = req.params.user;
+        let id =req.session.IDUser;
         let login = null;
         if(Number(id)){
             login = await users.findByPk(id,{
@@ -46,7 +46,7 @@ module.exports = {
         res.render('../views/WriteArticle',{login,error: '',edit:false,article:null,benefits:benefit});
     },
     async pagEditArticle(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_article = req.params.article;
         let login = null;
 
@@ -76,7 +76,7 @@ module.exports = {
         res.render('../views/WriteArticle',{login,error: '',edit:true,article:article,benefits:benefit});
     },
     async showArticle(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_article = req.params.article;
 
         let login = await users.findByPk(id_user,{
@@ -160,7 +160,7 @@ module.exports = {
         res.render('../views/ShowArticle',{login,article,error:null,message:null,comment});
     },
     async pagAdmPage(req,res){
-        let id = req.params.user;
+        let id = req.session.IDUser;
         let login = await users.findByPk(id,{
             raw:true,
             attributes:['IDUser','Name','Password','Email','Admin']
@@ -220,7 +220,7 @@ module.exports = {
     },
     async pagSubscriptions(req, res)
     {
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
 
         let login = await users.findByPk(id_user,{
             raw:true,

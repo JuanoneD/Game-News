@@ -5,7 +5,7 @@ module.exports =
 {
     async InsertPayment(req, res)
     {
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_sub = req.params.subscription;
         let data = req.body;
 

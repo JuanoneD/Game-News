@@ -3,7 +3,7 @@ const subsBenefits = require('../model/subscriptionsBenefits');
 module.exports = {
     async insertSubsBenefits(req,res){
         let data = req.body;
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id = req.params.sub;
 
 
@@ -24,7 +24,7 @@ module.exports = {
         res.redirect(`/AdmPage/${id_user}`);
     },
     async DeleteRelation(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let data = req.body;
 
         console.log(data);

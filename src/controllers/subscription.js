@@ -1,11 +1,10 @@
-const { where } = require('sequelize');
 const subscriptions = require('../model/subscriptions');
 const subbene = require('../model/subscriptionsBenefits');
 
 module.exports = {
     async insertSubs(req,res){
         let data = req.body;
-        let id = req.params.user;
+        let id = req.session.IDUser;
 
         await subscriptions.create({
             Price:data.Price,
@@ -14,7 +13,7 @@ module.exports = {
         res.redirect(`/AdmPage/${id}`);
     },
     async DeleteSubs(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_subs = req.params.subs;
 
         await subscriptions.destroy({
@@ -24,7 +23,7 @@ module.exports = {
         res.redirect(`/AdmPage/${id_user}`);
     },
     async UpdateSubs(req,res){
-        let id_user = req.params.user;
+        let id_user = req.session.IDUser;
         let id_subs = req.params.subs;
 
         await subscriptions.update(req.body,{

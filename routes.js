@@ -16,45 +16,44 @@ const subscriptionsBenefits = require('./src/controllers/subscriptionsBenefits')
 route.get('/logout',user.logout);
 route.post('/login',user.loginUser);
 
-route.post('/Update/:id',user.UpdateUser);
+route.post('/Update',user.UpdateUser);
 
-route.get('/WriteArticle/:user', render.pagWriteArticle);
-route.post('/WriteArticle/:user', multer(multerConfig).single('Image'), article.registerArticle);
+route.get('/WriteArticle', render.pagWriteArticle);
+route.post('/WriteArticle', multer(multerConfig).single('Image'), article.registerArticle);
 
-route.get('/UpdateArticle/:user/:article', render.pagEditArticle);
-route.post('/UpdateArticle/:user/:article', multer(multerConfig).single('Image'), article.updateArticle);
+route.get('/UpdateArticle/:article', render.pagEditArticle);
+route.post('/UpdateArticle/:article', multer(multerConfig).single('Image'), article.updateArticle);
 
-route.get('/DeleteArticle/:user/:article', article.deleteArticle);
-route.get('/DeleteComment/:user/:comment', comment.deleteComment);
+route.get('/DeleteArticle/:article', article.deleteArticle);
+route.get('/DeleteComment/:comment', comment.deleteComment);
 
 
-route.get('/Subscriptions/:user', render.pagSubscriptions);
+route.get('/Subscriptions', render.pagSubscriptions);
 
-route.post('/InsertPayment/:user/:subscription', payments.InsertPayment);
+route.post('/InsertPayment/:subscription', payments.InsertPayment);
 
-route.get('/articles/:user/:article',render.showArticle);
+route.get('/articles/:article',render.showArticle);
 
-route.post('/comment/:user/:article',comment.registerComment);
-route.post('/UpdateComment/:id/:comment',comment.updateComment);
+route.post('/comment/:article',comment.registerComment);
+route.post('/UpdateComment/:comment',comment.updateComment);
 
-route.get('/AdmPage/:user',render.pagAdmPage);
-route.post('/InsertMethod/:user',methods.InsertMethods);
-route.get('/DeleteMethod/:user/:method',methods.DeleteMethods)
-route.post('/UpdateMethod/:user/:method',methods.UpdateMethods)
-route.post('/InsertSub/:user',subscriptions.insertSubs);
-route.get('/DeleteSubscription/:user/:subs',subscriptions.DeleteSubs);
-route.post('/UpdateSubs/:user/:subs',subscriptions.UpdateSubs);
-route.post('/InsertBenefit/:user',benefits.insertBenefits);
-route.post('/UpdateBenefics/:user/:benefit',benefits.UpdateBenefits);
-route.get('/DeleteBenefit/:user/:benefit',benefits.DeleteBenefits);
-route.post('/InsertSubBenefit/:user/:sub',subscriptionsBenefits.insertSubsBenefits);
-route.post('/DeleteRelation/:user',subscriptionsBenefits.DeleteRelation);
+route.get('/AdmPage',render.pagAdmPage);
+route.post('/InsertMethod',methods.InsertMethods);
+route.get('/DeleteMethod/:method',methods.DeleteMethods)
+route.post('/UpdateMethod/:method',methods.UpdateMethods)
+route.post('/InsertSub',subscriptions.insertSubs);
+route.get('/DeleteSubscription/:subs',subscriptions.DeleteSubs);
+route.post('/UpdateSubs/:subs',subscriptions.UpdateSubs);
+route.post('/InsertBenefit',benefits.insertBenefits);
+route.post('/UpdateBenefics/:benefit',benefits.UpdateBenefits);
+route.get('/DeleteBenefit/:benefit',benefits.DeleteBenefits);
+route.post('/InsertSubBenefit/:sub',subscriptionsBenefits.insertSubsBenefits);
+route.post('/DeleteRelation',subscriptionsBenefits.DeleteRelation);
 
 
 
 route.post('/', user.registerUser);
 route.get('/', render.pagInicialGet);
-route.get('/:id',render.pagInicialGet);
 
 
 
