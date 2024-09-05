@@ -120,33 +120,32 @@ module.exports = {
         {
             if(!login)
             {
-                res.redirect("/");
+                renders.renderIndex(res,null,null,'Faça Login Para Ver esse Artigo');
                 return;
             }
             if(!login.Admin)
             {
                 UserSub = UserSub.map((item)=>{
                     if(Date.now() >= new Date(item.StartDate).getTime() && Date.now() <= new Date(item.EndDate).getTime())
+                        {
+                            return item;
+                        }
+                    });
+                    
+                    let HasBenefit = false;
+                    for(let i = 0; i < UserSub.length; ++i)
                     {
-                        return item;
+                        if(UserSub[i])
+                        {
+                            HasBenefit = true;
+                        }
                     }
-                });
-
-                let HasBenefit = false;
-                for(let i = 0; i < UserSub.length; ++i)
-                {
-                    if(UserSub[i])
+                    if(!HasBenefit)
                     {
-                        HasBenefit = true;
+                        renders.renderIndex(res,null,null,`Este artigo é barrado por uma assinatura`);
+                        return;
                     }
                 }
-
-                if(!HasBenefit)
-                {
-                    res.redirect("/");
-                    return;
-                }
-            }
         }
 
         let comment = await comments.findAll({
