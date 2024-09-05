@@ -78,7 +78,7 @@
                 <div class="new-amsterdam-title">
                     <span>Comentarios:</span>
                 </div>
-                <form class="text-center" method="post" action="/comment/<%=login?login.IDUser:''%>/<%=article.IDArticle%>">
+                <form class="text-center" method="post" action="/comment/<%=article.IDArticle%>">
                     <div class="input-group mb-3">
                         <input type="text" name="Description" class="form-control" placeholder="Deixe seu comentario"  <%=!login?'disabled':''%>>
                         <button class="btn btn-outline-secondary" type="submit"  <%=!login?'disabled':''%>>Comentar</button>
@@ -104,7 +104,7 @@
                             <%}}%>
                         </p>
                         </blockquote>
-                        <figcaption class="blockquote-footer" id="CommentValue"><%=comment[i].Description%></figcaption>
+                        <figcaption class="blockquote-footer" id="CommentValue<%=comment[i].IDComment%>"><%=comment[i].Description%></figcaption>
                     </figure>
                 </div>
             <%}%>
@@ -122,7 +122,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post"  action="/UpdateComment/<%=login?login.IDUser:''%>/" id="UpdateCommentForm">
+                        <form method="post"  action="/UpdateComment/" id="UpdateCommentForm">
                             <div class="mb-3">
                                 <label for="Email" class="form-label" >comentario:</label>
                                 <input type="text" class="form-control"  name="Description" id="CommentInput">
@@ -147,7 +147,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <a type="button"  id="DeletedCommentButton" class="btn btn-primary" href="/DeleteComment/<%=login?login.IDUser:''%>/">Excluir</a>
+                        <a type="button"  id="DeletedCommentButton" class="btn btn-primary" href="/DeleteComment/">Excluir</a>
                     </div>
                 </div>
             </div>

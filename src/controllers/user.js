@@ -72,7 +72,7 @@ module.exports = {
             },{where:{IDUser:id_user}});
         }
         
-        res.redirect(`/`);
+        res.redirect('back');
     },
     async loginUser(req,res){
         let data = req.body;
