@@ -13,10 +13,10 @@ const { Op } = require('sequelize')
 
 module.exports = {
     async pagInicialGet(req, res){
-        let id = req.params.id;
+        let id = req.session.IDUser;
         let login = null;
-        console.log(id);
-        if(Number(id)){
+        console.log(req.session)
+        if(req.session.IDUser){
             login = await users.findByPk(id,{
                 raw:true,
                 attributes:['IDUser','Name','Password','Email','Admin']
@@ -214,7 +214,6 @@ module.exports = {
             return{...subscrip,listBenefits:listName};
         }));
         
-        console.log(AllInfo[0].listBenefits[0]);
 
         res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo});
     },
