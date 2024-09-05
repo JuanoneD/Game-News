@@ -91,11 +91,15 @@ module.exports = {
         
         if( login.Password == createHash('sha256').update(data.Password).digest('hex')){
             renders.renderIndex(res,null,login,'Logado com sucesso');
+
+            req.session.IDUser = login.IDUser;
+
             return;
         }
         renders.renderIndex(res,'Senha errada');
     },
     async logout(req,res){
+        req.session.destroy()
         res.redirect('/');
     }
 };

@@ -54,7 +54,6 @@ route.post('/DeleteRelation',subscriptionsBenefits.DeleteRelation);
 
 route.post('/', user.registerUser);
 route.get('/', render.pagInicialGet);
-
-
+// route.get('/:id',render.pagInicialGet);
 
 module.exports = route;
