@@ -14,7 +14,7 @@ module.exports = {
             IDUser: id_user,
             IDArticle: id_article
         });
-        res.redirect(`/Articles/${id_user}/${id_article}`); /// change to the link for articles
+        res.redirect(`/Articles/${id_article}`); /// change to the link for articles
     },
     async updateComment(req,res){
         let id_user = req.session.IDUser;
@@ -38,14 +38,14 @@ module.exports = {
         }
         
         if(comment.IDUser != id_user){
-            res.redirect(`/Articles/${id_user}/${comment.IDArticle}`); /// change to the link for articles
+            res.redirect(`/Articles/${comment.IDArticle}`); /// change to the link for articles
             return;
         }
         
         await comments.update({
             Description: data.Description
         },{where:{IDComment: id_comment}});
-        res.redirect(`/Articles/${id_user}/${comment.IDArticle}`); /// change to the link for articles
+        res.redirect(`/Articles/${comment.IDArticle}`); /// change to the link for articles
     },
     async deleteComment(req,res){
         let id_user = req.session.IDUser;
@@ -67,11 +67,11 @@ module.exports = {
         }
         
         if(!(comment.IDUser == id_user || user.Admin == 1)){
-            res.redirect(`/Articles/${id_user}/${comment.IDArticle}`); /// change to the link for articles
+            res.redirect(`/Articles/${comment.IDArticle}`); /// change to the link for articles
             return;
         }
         
         await comments.destroy({where:{IDComment: id_comment}});
-        res.redirect(`/Articles/${id_user}/${comment.IDArticle}`); /// change to the link for articles
+        res.redirect(`/Articles/${comment.IDArticle}`); /// change to the link for articles
     } 
 }

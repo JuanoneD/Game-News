@@ -10,7 +10,7 @@ module.exports = {
             Price:data.Price,
             Description:data.Description
         })
-        res.redirect(`/AdmPage/${id}`);
+        res.redirect(`/AdmPage`);
     },
     async DeleteSubs(req,res){
         let id_user = req.session.IDUser;
@@ -20,7 +20,7 @@ module.exports = {
             where:{IDSubscription:id_subs}
         });
 
-        res.redirect(`/AdmPage/${id_user}`);
+        res.redirect(`/AdmPage`);
     },
     async UpdateSubs(req,res){
         let id_user = req.session.IDUser;
@@ -29,6 +29,6 @@ module.exports = {
         await subscriptions.update(req.body,{
             where:{IDSubscription:id_subs}
         });
-        res.redirect(`/AdmPage/${id_user}`);
+        res.redirect(`/AdmPage`);
     }
 }

@@ -27,7 +27,7 @@ module.exports = {
             IDUser: id_user,
             IDBenefit: (data.IDBenefit==0?null:data.IDBenefit)
         });
-        res.redirect("/" + id_user);
+        res.redirect("/");
     },
     async updateArticle(req,res){
         let id_user = req.session.IDUser;
@@ -40,7 +40,7 @@ module.exports = {
         });
 
         if(article.IDUser != id_user){
-            res.redirect('/' + id_user);
+            res.redirect('/');
             return;
         }
 
@@ -81,7 +81,7 @@ module.exports = {
             Content: article.Content,
             IDBenefit:(data.IDBenefit==0?null:data.IDBenefit)
         },{where: {IDArticle: id_article }});
-        res.redirect('/' + id_user);
+        res.redirect('/');
     },
     async deleteArticle(req,res){
         let id_user = req.session.IDUser;
@@ -93,7 +93,7 @@ module.exports = {
         });
 
         if(article.IDUser != id_user){
-            res.redirect('/' + id_user);
+            res.redirect('/');
             return;
         }
 
@@ -108,6 +108,6 @@ module.exports = {
         fs.unlink(`public/img/${Img.Image}`,(err) => {if(err){console.log(err);}});
 
         await articles.destroy({where:{IDArticle : id_article}});
-        res.redirect('/' + id_user);
+        res.redirect('/');
     }
 }

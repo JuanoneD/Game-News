@@ -30,7 +30,7 @@
     <header class="shadow">
         <div class="navbar navbar-expand-lg bg-body-tertiary" >
             <div class="container-fluid">
-                <a class="navbar-brand new-amsterdam-title" href="/<%=login?login.IDUser:''%>">
+                <a class="navbar-brand new-amsterdam-title" href="/">
                     <img src="https://staging.cohostcdn.org/avatar/378-30af52f7-ed57-4d7d-b754-2c505be4692b-profile.png" alt="" height="60px">
                     Game News
                 </a>
@@ -40,10 +40,10 @@
                     <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">🌙</a>
                     <%if(login){%>
                         <%if(login.Admin == 1){%>
-                            <a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a>
-                            <a  class="btn btn-primary" href="/AdmPage/<%=login.IDUser%>">Pagina do ADM</a>
+                            <a  class="btn btn-primary" href="/WriteArticle">Escrever artigo</a>
+                            <a  class="btn btn-primary" href="/AdmPage">Pagina do ADM</a>
                         <%}else{%>
-                            <a class="btn btn-success" href="/Subscriptions/<%=login.IDUser%>">Assinar Plano</a>
+                            <a class="btn btn-success" href="/Subscriptions">Assinar Plano</a>
                         <%}%>
                         <a  class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UpdateUser">Editar</a>
                         <a  class="btn btn-danger" href="/logout">Deslogar</a>
@@ -80,7 +80,7 @@
                                 <span class="btn btn-danger">Plano atual</span>
                             <%}else{%>
                                 <a data-bs-toggle="modal" data-bs-target="#PaymentModal"
-                                onclick="PaymentModal('<%=JSON.stringify(Subs[i])%>', '<%=login.IDUser%>')"
+                                onclick="PaymentModal('<%=JSON.stringify(Subs[i])%>')"
                                 class="btn btn-success buttonHover">Escolher plano</a>
                             <%}%>
                         </div>
@@ -99,7 +99,7 @@
                     <div class="modal-body">
                         <span class="new-amsterdam-title" id="PaymentSub"></span>
                         <br><br>
-                        <form method="post" id="InsertPayment" action="/InsertPayment/<%=login.IDUser%>/">
+                        <form method="post" id="InsertPayment" action="/InsertPayment">
                             <span>Valor: R$ <span id="PaymentValue"></span></span>
                             <br><br>
                             <label for="PaymentMethod">Forma de Pagamento</label>

@@ -8,7 +8,7 @@ module.exports={
         await Benefits.create({
             Description:data.Description
         });
-        res.redirect(`/AdmPage/${id}`);
+        res.redirect(`/AdmPage`);
     },
     async DeleteBenefits(req,res){
         let id_user = req.session.IDUser;
@@ -17,7 +17,7 @@ module.exports={
         await Benefits.destroy({
             where:{IDBenefit:id_benefit}
         });
-        res.redirect(`/AdmPage/${id_user}`);
+        res.redirect(`/AdmPage`);
     },
     async UpdateBenefits(req,res){
         let id_user = req.session.IDUser;
@@ -26,6 +26,6 @@ module.exports={
         await Benefits.update(req.body,{
             where:{IDBenefit:id_benefit}
         })
-        res.redirect(`/AdmPage/${id_user}`);
+        res.redirect(`/AdmPage`);
     }
 }

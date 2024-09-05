@@ -40,10 +40,10 @@
                     <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">🌙</a>
                     <%if(login){%>
                         <%if(login.Admin == 1){%>
-                            <a  class="btn btn-primary" href="/WriteArticle/">Escrever artigo</a>
-                            <a  class="btn btn-primary" href="/AdmPage/">Pagina do ADM</a>
+                            <a  class="btn btn-primary" href="/WriteArticle">Escrever artigo</a>
+                            <a  class="btn btn-primary" href="/AdmPage">Pagina do ADM</a>
                         <%}else{%>
-                            <a class="btn btn-success" href="/Subscriptions/">Assinar Plano</a>
+                            <a class="btn btn-success" href="/Subscriptions">Assinar Plano</a>
                         <%}%>
                         <a  class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UpdateUser">Editar</a>
                         <a  class="btn btn-danger" href="/logout">Deslogar</a>
@@ -176,7 +176,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post"  action="/Update/">
+                        <form method="post"  action="/Update">
                             <div class="mb-3">
                                 <label for="Name" class="form-label">Nome:</label>
                                 <input type="text" class="form-control"  value="<%=login.Name%>" name="Name">

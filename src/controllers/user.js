@@ -72,7 +72,7 @@ module.exports = {
             },{where:{IDUser:id_user}});
         }
         
-        res.redirect(`/${OldPassword.IDUser}`);
+        res.redirect(`/`);
     },
     async loginUser(req,res){
         let data = req.body;

@@ -15,7 +15,7 @@
     <header class="shadow">
         <div class="navbar navbar-expand-lg bg-body-tertiary" style="flex-wrap: nowrap;">
             <div class="container-fluid">
-                <a class="navbar-brand new-amsterdam-title" href="/<%= login.IDUser %>">
+                <a class="navbar-brand new-amsterdam-title" href="/">
                     <img src="https://staging.cohostcdn.org/avatar/378-30af52f7-ed57-4d7d-b754-2c505be4692b-profile.png" alt="" height="60px">
                     Game News
                 </a>
@@ -23,7 +23,7 @@
             <div class="d-flex" id="Registers">
                 <div class="container text-nowrap">
                     <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">🌙</a>
-                    <a class="btn btn-primary" href="/<%=login.IDUser%>">Voltar</a>
+                    <a class="btn btn-primary" href="/">Voltar</a>
                     <%if(login){%>
                         <a class="btn btn-danger" href="/Logout">Deslogar</a>
                     <%}%>
@@ -66,7 +66,7 @@
             </div>
             <div class="d-flex align-items-center">
                 <%if(edit){%>
-                <a href="/DeleteArticle/<%= login.IDUser %>/<%= article.IDArticle %>" class="btn btn-danger">Deletar artigo</a>
+                <a href="/DeleteArticle/<%= article.IDArticle %>" class="btn btn-danger">Deletar artigo</a>
                 <%}%>
                 <input type="submit" class="btn btn-primary FormText">
             </div>

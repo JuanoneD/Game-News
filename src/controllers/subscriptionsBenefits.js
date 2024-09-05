@@ -12,7 +12,7 @@ module.exports = {
             where:{SubscriptionIDSubscription:id,BenefitIDBenefit:data.IDBenefit}
         })
         if(subs.length != 0 || data.IDBenefit == 0){
-            res.redirect(`/AdmPage/${id_user}`);
+            res.redirect(`/AdmPage`);
             return;
         }
 
@@ -21,7 +21,7 @@ module.exports = {
             BenefitIDBenefit:data.IDBenefit
         });
         
-        res.redirect(`/AdmPage/${id_user}`);
+        res.redirect(`/AdmPage`);
     },
     async DeleteRelation(req,res){
         let id_user = req.session.IDUser;
@@ -33,6 +33,6 @@ module.exports = {
             where:{IDSubscriptionsBenefits:data.IDSubscriptionsBenefits}
         });
 
-        res.redirect(`/AdmPage/${id_user}`);
+        res.redirect(`/AdmPage`);
     }
 }

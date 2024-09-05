@@ -45,7 +45,7 @@ route.post('/InsertSub',subscriptions.insertSubs);
 route.get('/DeleteSubscription/:subs',subscriptions.DeleteSubs);
 route.post('/UpdateSubs/:subs',subscriptions.UpdateSubs);
 route.post('/InsertBenefit',benefits.insertBenefits);
-route.post('/UpdateBenefics/:benefit',benefits.UpdateBenefits);
+route.post('/UpdateBenefits/:benefit',benefits.UpdateBenefits);
 route.get('/DeleteBenefit/:benefit',benefits.DeleteBenefits);
 route.post('/InsertSubBenefit/:sub',subscriptionsBenefits.insertSubsBenefits);
 route.post('/DeleteRelation',subscriptionsBenefits.DeleteRelation);

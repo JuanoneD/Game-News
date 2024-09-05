@@ -8,13 +8,13 @@ module.exports={
         await methods.create({
             Description:data.Description
         });
-        res.redirect(`/AdmPage/${id}`);
+        res.redirect(`/AdmPage`);
     },
     async DeleteMethods(req,res){
         let id = req.session.IDUser;
         let id_method = req.params.method;
         await methods.destroy({where:{IDMethod:id_method}});
-        res.redirect(`/AdmPage/${id}`);
+        res.redirect(`/AdmPage`);
     },
     async UpdateMethods(req,res){
         let id = req.session.IDUser;
@@ -25,6 +25,6 @@ module.exports={
             Description: data.Description
         },{where:{IDMethod:id_method}});
 
-        res.redirect(`/AdmPage/${id}`);
+        res.redirect(`/AdmPage`);
     }
 }

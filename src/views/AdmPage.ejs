@@ -30,7 +30,7 @@
     <header class="shadow">
         <div class="navbar navbar-expand-lg bg-body-tertiary" >
             <div class="container-fluid">
-                <a class="navbar-brand new-amsterdam-title" href="/<%=login?login.IDUser:''%>">
+                <a class="navbar-brand new-amsterdam-title" href="/">
                     <img src="https://staging.cohostcdn.org/avatar/378-30af52f7-ed57-4d7d-b754-2c505be4692b-profile.png" alt="" height="60px">
                     Game News
                 </a>
@@ -39,7 +39,7 @@
                 <div class="container text-nowrap">
                     <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">☀️</a>
                     <%if(login){%>
-                        <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle/<%=login.IDUser%>">Escrever artigo</a><%}%>
+                        <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/WriteArticle">Escrever artigo</a><%}%>
                         <a  class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UpdateUser">Editar</a>
                         <a  class="btn btn-danger" href="/logout">Deslogar</a>
                     <%}else{%>
@@ -73,8 +73,8 @@
                                 <td><%=methods[i].IDMethod%></td>
                                 <td id="MethDesc<%=methods[i].IDMethod%>"><%=methods[i].Description%></td>
                                 <td>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(1,'<%=methods[i].IDMethod%>','<%=login.IDUser%>')">📝</a>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(1,'<%=methods[i].IDMethod%>','<%=login.IDUser%>')">❌</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(1,'<%=methods[i].IDMethod%>')">📝</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(1,'<%=methods[i].IDMethod%>')">❌</a>
                                 </td>
                             </tr>
                         <%}%>
@@ -102,8 +102,8 @@
                                 <td><%=benefits[i].IDBenefit%></td>
                                 <td id="BeneDesc<%=benefits[i].IDBenefit%>"><%=benefits[i].Description%></td>
                                 <td>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(2,'<%=benefits[i].IDBenefit%>','<%=login.IDUser%>')">📝</a>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(2,'<%=benefits[i].IDBenefit%>','<%=login.IDUser%>')">❌</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(2,'<%=benefits[i].IDBenefit%>')">📝</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(2,'<%=benefits[i].IDBenefit%>')">❌</a>
                                 </td>
                             </tr>
                         <%}%>
@@ -143,8 +143,8 @@
                                 <td>
                                     <a data-bs-toggle="modal"  data-bs-target="#RelationInsert" style="cursor:pointer;" onclick="SetIDsub('<%=subscriptions[i].IDSubscription%>')">➕</a>
                                     <a data-bs-toggle="modal"  data-bs-target="#RelationDestroy" style="cursor:pointer;" onclick="UpdateRelation('<%=JSON.stringify(subscriptions[i].listBenefits)%>')">➖</a>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(3,'<%=subscriptions[i].IDSubscription%>','<%=login.IDUser%>')">📝</a>
-                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(3,'<%=subscriptions[i].IDSubscription%>','<%=login.IDUser%>')">❌</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Update" style="cursor: pointer;" onclick="ChangeUpdateADM(3,'<%=subscriptions[i].IDSubscription%>')">📝</a>
+                                    <a data-bs-toggle="modal"  data-bs-target="#Delete" style="cursor: pointer;" onclick="ChangeDeleteADM(3,'<%=subscriptions[i].IDSubscription%>')">❌</a>
                             </td>
                         </tr>
                     <%}%>
@@ -165,7 +165,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="/DeleteRelation/<%=login.IDUser%>/">
+                        <form method="post" action="/DeleteRelation">
                             <label for="Select" class="form-label p-2">Beneficio:</label>
                             <select name="IDSubscriptionsBenefits" id="IdSelecRelation" class="form-select">
                             </select>
@@ -185,7 +185,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" id="UpdateForm" action="/InsertBenefit/<%=login.IDUser%>">
+                        <form method="post" id="UpdateForm" action="/InsertBenefit">
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Descrição:</label>
                                 <input type="text" class="form-control" id="UpdateInput"  name="Description">
@@ -224,7 +224,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" id="InsertSubBenefit" action="/InsertSubBenefit/<%=login.IDUser%>/">
+                        <form method="post" id="InsertSubBenefit" action="/InsertSubBenefit/">
                             <label for="Select" class="form-label p-2">Beneficio:</label>
                             <select id="Select" name="IDBenefit" class="form-select">
                                 <option value="" hidden>Selecionar uma opção</option>
@@ -248,7 +248,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post"  action="/InsertBenefit/<%=login.IDUser%>">
+                        <form method="post"  action="/InsertBenefit">
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Descrição:</label>
                                 <input type="text" class="form-control"  name="Description">
@@ -269,7 +269,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post"  action="/InsertSub/<%=login.IDUser%>">
+                        <form method="post"  action="/InsertSub">
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Descrição:</label>
                                 <input type="text" class="form-control"  name="Description">
@@ -294,7 +294,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post"  action="/InsertMethod/<%=login.IDUser%>">
+                        <form method="post"  action="/InsertMethod">
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Descrição:</label>
                                 <input type="text" class="form-control"  name="Description">
@@ -371,7 +371,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="post"  action="/Update/<%=login.IDUser%>">
+                            <form method="post"  action="/Update">
                                 <div class="mb-3">
                                     <label for="Name" class="form-label">Nome:</label>
                                     <input type="text" class="form-control"  value="<%=login.Name%>" name="Name">

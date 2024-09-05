@@ -57,7 +57,7 @@ function ChangeFormImg()
 
 function SetIDsub(idSub){
     console.log(idSub);
-    document.getElementById('InsertSubBenefit').action+= `${idSub}`;
+    document.getElementById('InsertSubBenefit').action += `${idSub}`;
 }
 
 function ChangeDeleteComment(id){
@@ -66,20 +66,18 @@ function ChangeDeleteComment(id){
     document.getElementById('CommentInput').value = document.getElementById('CommentValue').innerHTML;
 }
 
-
-
-function ChangeDeleteADM(method,id_deleted,id_user){
+function ChangeDeleteADM(method,id_deleted){
     let button = document.getElementById('DeletedAdmButton');
     if(method == 1){
-        button.href = `/DeleteMethod/${id_user}/${id_deleted}`
+        button.href = `/DeleteMethod/${id_deleted}`
     }else if(method == 2){
-        button.href = `/DeleteBenefit/${id_user}/${id_deleted}`
+        button.href = `/DeleteBenefit/${id_deleted}`
     }else if(method==3){
-        button.href = `/DeleteSubscription/${id_user}/${id_deleted}`
+        button.href = `/DeleteSubscription/${id_deleted}`
     }
 }
 
-function ChangeUpdateADM(method,id_Updated,id_user){
+function ChangeUpdateADM(method,id_Updated){
     let form = document.getElementById('UpdateForm');
     if(method==1){
         let desc = document.getElementById(`MethDesc${id_Updated}`).innerHTML;
@@ -91,7 +89,7 @@ function ChangeUpdateADM(method,id_Updated,id_user){
         </div>
         <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
         `
-        form.action = `/UpdateMethod/${id_user}/${id_Updated}`
+        form.action = `/UpdateMethod/${id_Updated}`
     }else if(method==2){
         let desc = document.getElementById(`BeneDesc${id_Updated}`).innerHTML;
         document.getElementById('UpdataTitle').innerHTML = 'Editar Beneficios'
@@ -102,7 +100,7 @@ function ChangeUpdateADM(method,id_Updated,id_user){
         </div>
         <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
         `;
-        form.action = `/UpdateBenefics/${id_user}/${id_Updated}`
+        form.action = `/UpdateBenefits/${id_Updated}`
     }else if(method==3){
         let desc = document.getElementById(`SubsDesc${id_Updated}`).innerHTML;
         let price = document.getElementById(`SubsPrice${id_Updated}`).innerHTML;
@@ -118,7 +116,7 @@ function ChangeUpdateADM(method,id_Updated,id_user){
         <button type="submit" class="btn btn-primary fw-bold text-uppercase">Editar</button>
         `
         document.getElementById('UpdataTitle').innerHTML = 'Editar Assinaturas'
-        form.action = `/UpdateSubs/${id_user}/${id_Updated}`
+        form.action = `/UpdateSubs/${id_Updated}`
     }
 }
 function UpdateRelation(data){
@@ -134,11 +132,11 @@ function UpdateRelation(data){
     selection.innerHTML = text;
 }
 
-function PaymentModal(Sub, User)
+function PaymentModal(Sub)
 {
     Sub = JSON.parse(Sub);
 
-    document.getElementById('InsertPayment').action = `/InsertPayment/${User}/${Sub.IDSubscription}`;
+    document.getElementById('InsertPayment').action = `/InsertPayment/${Sub.IDSubscription}`;
     document.getElementById('PaymentValue').innerHTML = Sub.Price.toFixed(2);
     document.getElementById('PaymentSub').innerHTML = Sub.Description;
 }

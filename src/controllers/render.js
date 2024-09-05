@@ -15,8 +15,7 @@ module.exports = {
     async pagInicialGet(req, res){
         let id = req.session.IDUser;
         let login = null;
-        console.log(req.session)
-        if(req.session.IDUser){
+        if(id){
             login = await users.findByPk(id,{
                 raw:true,
                 attributes:['IDUser','Name','Password','Email','Admin']
@@ -25,7 +24,7 @@ module.exports = {
         renders.renderIndex(res,null,login);
     },
     async pagWriteArticle(req,res){
-        let id =req.session.IDUser;
+        let id = req.session.IDUser;
         let login = null;
         if(Number(id)){
             login = await users.findByPk(id,{
@@ -79,6 +78,8 @@ module.exports = {
         let id_user = req.session.IDUser;
         let id_article = req.params.article;
 
+        if(!id_user){id_user = 0;}
+
         let login = await users.findByPk(id_user,{
             raw:true,
             attributes:['IDUser','Name','Password','Email','Admin']
@@ -115,27 +116,37 @@ module.exports = {
             }
         );
 
-
-        UserSub = UserSub.map((item)=>{
-            if(Date.now() >= new Date(item.StartDate).getTime() && Date.now() <= new Date(item.EndDate).getTime())
-            {
-                return item;
-            }
-        });
-
-        let HasBenefit = false;
-        for(let i = 0; i < UserSub.length; ++i)
+        if(article.IDBenefit)
         {
-            if(UserSub[i])
+            if(!login)
             {
-                HasBenefit = true;
+                res.redirect("/");
+                return;
             }
-        }
+            if(!login.Admin)
+            {
+                UserSub = UserSub.map((item)=>{
+                    if(Date.now() >= new Date(item.StartDate).getTime() && Date.now() <= new Date(item.EndDate).getTime())
+                    {
+                        return item;
+                    }
+                });
 
-        if(!HasBenefit)
-        {
-            res.redirect("/" + id_user);
-            return;
+                let HasBenefit = false;
+                for(let i = 0; i < UserSub.length; ++i)
+                {
+                    if(UserSub[i])
+                    {
+                        HasBenefit = true;
+                    }
+                }
+
+                if(!HasBenefit)
+                {
+                    res.redirect("/");
+                    return;
+                }
+            }
         }
 
         let comment = await comments.findAll({
