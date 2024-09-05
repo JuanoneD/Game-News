@@ -86,11 +86,57 @@ module.exports = {
 
         let article = await articles.findByPk(id_article,{
             raw:true,
-            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','Image','createdAt','updatedAt', 'User.Name'],
+            attributes:['IDArticle','Title','Highlight','Content','Description','IDUser','Image','createdAt','updatedAt', 'User.Name','IDBenefit'],
             include:{
                 model:users
             },
         })
+
+        let UserSub = await payments.findAll
+        (
+            {
+                raw: true,
+                include: 
+                {
+                    model: subscriptions, 
+                    required: true, 
+                    include: 
+                    {
+                        model: benefits, 
+                        required: true, 
+                        where: {IDBenefit: article.IDBenefit}
+                    }
+                },
+                attributes: ['IDPayment','StartDate','EndDate'],
+                where:
+                {
+                    IDUser: id_user
+                }
+            }
+        );
+
+
+        UserSub = UserSub.map((item)=>{
+            if(Date.now() >= new Date(item.StartDate).getTime() && Date.now() <= new Date(item.EndDate).getTime())
+            {
+                return item;
+            }
+        });
+
+        let HasBenefit = false;
+        for(let i = 0; i < UserSub.length; ++i)
+        {
+            if(UserSub[i])
+            {
+                HasBenefit = true;
+            }
+        }
+
+        if(!HasBenefit)
+        {
+            res.redirect("/" + id_user);
+            return;
+        }
 
         let comment = await comments.findAll({
             raw:true,
