@@ -38,6 +38,7 @@ route.post('/comment/:article',comment.registerComment);
 route.post('/UpdateComment/:comment',comment.updateComment);
 
 route.get('/AdmPage',render.pagAdmPage);
+route.post('/AdmPage',render.pagAdmPage);
 route.post('/InsertMethod',methods.InsertMethods);
 route.get('/DeleteMethod/:method',methods.DeleteMethods)
 route.post('/UpdateMethod/:method',methods.UpdateMethods)
@@ -54,6 +55,5 @@ route.post('/DeleteRelation',subscriptionsBenefits.DeleteRelation);
 
 route.post('/', user.registerUser);
 route.get('/', render.pagInicialGet);
-// route.get('/:id',render.pagInicialGet);
 
 module.exports = route;

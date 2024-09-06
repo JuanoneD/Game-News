@@ -7,9 +7,12 @@ const benefits = require('../model/benefits');
 const payments = require('../model/payments');
 const subscriptions = require('../model/subscriptions');
 const fs = require('fs');
-const Benefits = require('../model/benefits');
 const subscriptionsBenefits = require('../model/subscriptionsBenefits');
-const { Op } = require('sequelize')
+const { Op, col, where } = require('sequelize');
+const { raw } = require('express');
+const { start } = require('repl');
+const Methods = require('../model/methods');
+const { name } = require('ejs');
 
 module.exports = {
     async pagInicialGet(req, res){
@@ -199,15 +202,6 @@ module.exports = {
             attributes:['IDSubscription','Description','Price']
         });
 
-        // await subscription.forEach(async (sub,index) => {            
-        //     let listBenefits = await subscriptionsBenefits.findAll({
-        //         raw:true,
-        //         attributes:['IDBenefit'],
-        //         where:{'SubscriptionIDSubscription':sub.IDSubscription}
-        //     });
-        //     subscription[index].listBenefits = listBenefits;
-        // })
-
         const AllInfo = await Promise.all(subscription.map(async (subscrip)=>{
             const listBenefits  = await subscriptionsBenefits.findAll({
                 raw:true,
@@ -223,9 +217,34 @@ module.exports = {
             }))
             return{...subscrip,listBenefits:listName};
         }));
-        
 
-        res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo});
+        let payment = await payments.findAll({
+            raw:true,
+            attributes:[
+                'IDPayment',
+                'StartDate',
+                'EndDate',
+                'Value',
+                [col('User.Name'),'Name'],
+                [col('Method.Description'),'MethodDescription'],
+                [col('Subscription.Description'),'SubDescription'],
+            ],
+            include:[
+               { model: subscriptions},{model:Methods},
+               {
+                model:users,
+                where:(req.body.SearchByName?{'Name':req.body.SearchByName}:{})
+               }
+            ],
+            order:[['createdAt','DESC']],
+            limit: 10
+        })
+
+        if(req.body){
+            console.log(req.body);
+        }
+
+        res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo,payments:payment});
     },
     async pagSubscriptions(req, res)
     {
