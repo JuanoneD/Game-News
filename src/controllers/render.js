@@ -233,16 +233,12 @@ module.exports = {
                { model: subscriptions},{model:Methods},
                {
                 model:users,
-                where:(req.body.SearchByName?{'Name':req.body.SearchByName}:{})
+                where:(req.body.SearchByName?{'Name':{[Op.like]:`%${req.body.SearchByName}%`}}:{})
                }
             ],
             order:[['createdAt','DESC']],
             limit: 10
         })
-
-        if(req.body){
-            console.log(req.body);
-        }
 
         res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo,payments:payment});
     },
