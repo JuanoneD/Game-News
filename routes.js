@@ -12,6 +12,7 @@ const payments = require('./src/controllers/payments');
 const subscriptions = require('./src/controllers/subscription');
 const benefits = require('./src/controllers/benefits');
 const subscriptionsBenefits = require('./src/controllers/subscriptionsBenefits');
+const likes = require('./src/controllers/like');
 
 route.get('/logout',user.logout);
 route.post('/login',user.loginUser);
@@ -36,6 +37,8 @@ route.get('/articles/:article',render.showArticle);
 
 route.post('/comment/:article',comment.registerComment);
 route.post('/UpdateComment/:comment',comment.updateComment);
+route.get('/InsertLike/:article',likes.registerLike);
+route.get('/DeleteLike/:article',likes.deleteLike);
 
 route.get('/AdmPage',render.pagAdmPage);
 route.post('/AdmPage',render.pagAdmPage);

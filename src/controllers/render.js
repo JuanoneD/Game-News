@@ -13,6 +13,8 @@ const { raw } = require('express');
 const { start } = require('repl');
 const Methods = require('../model/methods');
 const { name } = require('ejs');
+const likes = require('../model/likes');
+const { count } = require('console');
 
 module.exports = {
     async pagInicialGet(req, res){
@@ -168,9 +170,13 @@ module.exports = {
             item.updatedAt = new Date(item.updatedAt).toLocaleString('pt-BR');
         })
 
+        let num_likes = await likes.count({where:{IDArticle:id_article}});
+
+        let this_like = await likes.findOne({where:{IDArticle:id_article,IDUser:id_user}});
+
         article.Content = fs.readFileSync(`public/articles/${article.Content}`, (err)=>{if(err){console.log(err)}});
 
-        res.render('../views/ShowArticle',{login,article,error:null,message:null,comment});
+        res.render('../views/ShowArticle',{login,article,error:null,message:null,comment,num_likes,this_like: this_like?true:false});
     },
     async pagAdmPage(req,res){
         let id = req.session.IDUser;

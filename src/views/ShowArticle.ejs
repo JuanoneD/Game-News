@@ -75,8 +75,20 @@
         </section>
         <section class="container" style="margin-top: 1%;">
             <div>
-                <div class="new-amsterdam-title">
+                <div class="new-amsterdam-title" style="display: flex;justify-content: space-between;">
                     <span>Comentarios:</span>
+                    <div>
+                        <%if(!this_like){%>
+                            <a style="text-decoration: none;" <%if(login){%> href="/InsertLike/<%=article.IDArticle%>" <%}else{%> data-bs-toggle='modal' data-bs-target='#LoginUser'<%}%>>
+                                <img src="https://cdn.worldvectorlogo.com/logos/facebook-like.svg"  height="30px">
+                            </a>
+                        <%}else{%>
+                            <a style="text-decoration: none;" href="/DeleteLike/<%=article.IDArticle%>">
+                                <img src="https://cdn-icons-png.flaticon.com/512/10307/10307920.png"  height="30px">
+                            </a>
+                        <%}%>
+                        <%=num_likes%>
+                    </div>
                 </div>
                 <form class="text-center" method="post" action="/comment/<%=article.IDArticle%>">
                     <div class="input-group mb-3">

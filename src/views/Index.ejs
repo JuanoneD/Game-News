@@ -66,7 +66,7 @@
                 <div class="carousel-inner">
                     <%j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 1){j++;%>
                         <div class="carousel-item <%=j==1? 'active':''%>">
-                            <a href="articles/<%=articles[i].IDArticle%>">
+                            <a href="/articles/<%=articles[i].IDArticle%>">
                                 <img src="/img/<%=articles[i].Image%>"class="d-block w-100"  style="height: 600px;object-fit: cover;">
                             </a>
 
@@ -85,12 +85,39 @@
                 </a>
             </div>
         </section>
+        <%if(most_likes){%>
+            <div class="new-amsterdam-title container" style="display: flex;justify-content: space-between;margin-top:2%;" >
+                <span>Mais Curtidos:</span>
+            </div>
+            <section class="container card-group container">
+                <%j = 0;for(let i=0;i<most_likes.length;i++){if(i==3){break};%>
+                    <div class="container col-sm-12 col-md-6 col-lg-4" style="margin-top: 1%;">
+                        <a href="/articles/<%=most_likes[i].IDArticle%>" style="text-decoration:none;">
+                            <div class="card text-center" style="height: 98%;padding: 5%;">
+                                <div class="card-header new-amsterdam-title" style="font-size: 160%;">
+                                    <%=most_likes[i]['Article.Title']%>
+                                </div>
+                                <div>
+                                    <img src="/img/<%=most_likes[i]['Article.Image']%>" class="card-img-top" style="height: 200px;object-fit: cover;">
+                                </div>
+                                <div class="card-body">
+                                    <%=most_likes[i]['Article.Description']%>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <%}%>
+            </section>
 
-        <section class="container card-group container" style="margin-top: 2%;">
-    
+        <%}%>
+
+        <div class="new-amsterdam-title container" style="display: flex;justify-content: space-between;margin-top:2%;" >
+            <span>Ultimos Lançamentos:</span>
+        </div>
+        <section class="container card-group container">
             <%j = 0;for(let i=0;i<articles.length;i++){if(articles[i].Highlight == 0){j++;%>
-                <div class="container col-sm-12 col-md-6 col-lg-4" style="margin-top: 2%;">
-                    <a href="articles/<%=articles[i].IDArticle%>" style="text-decoration:none;">
+                <div class="container col-sm-12 col-md-6 col-lg-4" style="margin-top: 1%;">
+                    <a href="/articles/<%=articles[i].IDArticle%>" style="text-decoration:none;">
                         <div class="card text-center" style="height: 98%;padding: 5%;">
                             <div class="card-header new-amsterdam-title" style="font-size: 160%;">
                                 <%=articles[i].Title%>
