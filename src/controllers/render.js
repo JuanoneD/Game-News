@@ -189,7 +189,7 @@ module.exports = {
             return;
         }
         if(login.Admin == 0){
-            res.redirect(`/${login.IDUser}`);
+            res.redirect(`/`);
             return;
         }
 
