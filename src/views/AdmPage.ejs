@@ -172,25 +172,87 @@
                       <th scope="col">Data de inicio</th>
                       <th scope="col">Data de Fim</th>
                     </tr>
-                    <tbody>
-                        <%for(let i=0;i<payments.length;i++){%>
-                            <tr>
-                                <td scope="col"><%=payments[i].IDPayment%></td>
-                                <td scope="col"><%=payments[i].Name%></td>
-                                <td scope="col"><%=payments[i].Value%></td>
-                                <td scope="col"><%=payments[i].MethodDescription%></td>
-                                <td scope="col"><%=payments[i].SubDescription%></td>
-                                <td scope="col"><%=payments[i].StartDate.toLocaleDateString('pt-BR')%></td>
-                                <td scope="col"><%=payments[i].EndDate.toLocaleDateString('pt-BR')%></td>
-                            </tr>
-                        <%}%>
-                    </tbody>
                 </thead>
+                <tbody>
+                    <%for(let i=0;i<payments.length;i++){%>
+                        <tr>
+                            <td scope="col"><%=payments[i].IDPayment%></td>
+                            <td scope="col"><%=payments[i].Name%></td>
+                            <td scope="col"><%=payments[i].Value%></td>
+                            <td scope="col"><%=payments[i].MethodDescription%></td>
+                            <td scope="col"><%=payments[i].SubDescription%></td>
+                            <td scope="col"><%=payments[i].StartDate.toLocaleDateString('pt-BR')%></td>
+                            <td scope="col"><%=payments[i].EndDate.toLocaleDateString('pt-BR')%></td>
+                        </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="container" style="margin-top: 3%">
+            <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
+                <div class="new-amsterdam-title">Usuarios</div>
+                <div>
+                    <form method="post">
+                        <input type="search" name="SearchByName" class="form-control form-control-dark text-bg-dark" placeholder="Pesquisar" aria-label="Search">
+                        <input type="submit" hidden>
+                    </form>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nome Usuario</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Admin</th>
+                      <th scope="col">Creado em:</th>
+                      <th scope="col">Editado em</th>
+                      <th scope="col">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(let i=0;i<all_users.length;i++){%>
+                        <tr>
+                            <td scope="col"><%=all_users[i].IDUser%></td>
+                            <td scope="col"><%=all_users[i].Name%></td>
+                            <td scope="col"><%=all_users[i].Email%></td>
+                            <td scope="col"><%=all_users[i].Admin?'Verdadeiro':'Falso'%></td>
+                            <td scope="col"><%=all_users[i].createdAt.toLocaleDateString('pt-BR')%></td>
+                            <td scope="col"><%=all_users[i].updatedAt.toLocaleDateString('pt-BR')%></td>
+                            <td scope="col">
+                                <a data-bs-toggle="modal"  data-bs-target="#ChangeAdm" style="cursor:pointer;" onclick="document.getElementById('ChangeAdmForm').action = 'ChangeAdm/<%=all_users[i].IDUser%>'">📝</a>
+                            </td>
+                        </tr>
+                    <%}%>
+                </tbody>
+            </table>
         </section>
     </main>
-
-
-        <!-- Modals -->
+    
+    
+    <!-- Modals -->
+    
+            <div class="modal fade" id="ChangeAdm" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Definir Admin</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="" id="ChangeAdmForm">
+                                <label for="Select" class="form-label p-2">Admin:</label>
+                                <select name="Admin" class="form-select">
+                                    <option value="1">Verdadeiro</option>
+                                    <option value="0" selected>False</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 2%;">Editar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         <div class="modal fade" id="RelationDestroy" tabindex="-1">

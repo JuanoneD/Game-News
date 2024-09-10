@@ -246,7 +246,12 @@ module.exports = {
             limit: 10
         })
 
-        res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo,payments:payment});
+        let all_users = await users.findAll({
+            raw:true
+        })
+
+
+        res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo,payments:payment,all_users});
     },
     async pagSubscriptions(req, res)
     {

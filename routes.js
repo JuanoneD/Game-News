@@ -53,6 +53,7 @@ route.post('/UpdateBenefits/:benefit',benefits.UpdateBenefits);
 route.get('/DeleteBenefit/:benefit',benefits.DeleteBenefits);
 route.post('/InsertSubBenefit/:sub',subscriptionsBenefits.insertSubsBenefits);
 route.post('/DeleteRelation',subscriptionsBenefits.DeleteRelation);
+route.post('/ChangeAdm/:id',user.changeAdm);
 
 
 
