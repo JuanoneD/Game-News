@@ -98,6 +98,18 @@ module.exports = {
         }
         renders.renderIndex(res,'Senha errada');
     },
+
+    async changeAdm(req,res){
+        let id_user = req.params.id;
+
+        let data = req.body;
+
+        await users.update({
+            Admin:data.Admin
+        },{where:{IDUser:id_user}});
+
+        res.redirect('/AdmPage');
+    },
     async logout(req,res){
         req.session.destroy()
         res.redirect('/');
