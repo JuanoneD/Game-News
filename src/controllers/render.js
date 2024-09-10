@@ -247,7 +247,8 @@ module.exports = {
         })
 
         let all_users = await users.findAll({
-            raw:true
+            raw:true,
+            where:(req.body.SearchByName?{'Name':{[Op.like]:`%${req.body.SearchByNameUser}%`}}:{})
         })
 
 
