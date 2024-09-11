@@ -20,11 +20,14 @@ module.exports={
             ],
             include: {
                 model: Article, // Ensure this is the correct model name
-                attributes: ['Title', 'Highlight', 'Image', 'Content', 'IDUser', 'Description']
+                attributes: ['Title', 'Highlight', 'Image', 'Content', 'IDUser', 'Description'],
+                required: true
             },
             group: ['Article.IDArticle', 'Article.Title', 'Article.Highlight', 'Article.Image', 'Article.Content', 'Article.IDUser', 'Article.Description','Likes.IDArticle'],
             order: [[sequelize.literal('likeCount'), 'DESC']],
         });
+
+        console.log(most_likes);
         
         res.render('../views/index', {error:error,login:login,message:message,articles:articles,most_likes})
     },
