@@ -34,8 +34,8 @@
                     Game News
                 </a>
             </div>
-            <div class="d-flex" id="Registers">
-                <div class="container text-nowrap">
+            <div class="d-flex" id="Registers" style="width: 100%;">
+                <div class="container text-nowrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 1%">
                     <a id="theme" onclick="ToggleTheme()" class="btn" style="font-size: 26px">🌙</a>
                     <%if(login){%>
                         <%if(login.Admin == 1){%><a  class="btn btn-primary" href="/UpdateArticle/<%=article.IDArticle%>">Editar artigo</a><%}%>
