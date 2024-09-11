@@ -248,9 +248,11 @@ module.exports = {
 
         let all_users = await users.findAll({
             raw:true,
-            where:(req.body.SearchByName?{'Name':{[Op.like]:`%${req.body.SearchByNameUser}%`}}:{})
+            where:(req.body.SearchByNameUser?{'Name':{[Op.like]:`%${req.body.SearchByNameUser}%`}}:{})
         })
 
+        console.log(req.body.SearchByName)
+        console.log(req.body.SearchByNameUser)
 
         res.render('../views/AdmPage',{login,error:null,message:null,methods:method,benefits:benefit,subscriptions:AllInfo,payments:payment,all_users});
     },
