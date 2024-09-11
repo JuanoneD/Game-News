@@ -147,7 +147,7 @@ module.exports = {
                     }
                     if(!HasBenefit)
                     {
-                        renders.renderIndex(res,null,null,`Este artigo é barrado por uma assinatura`);
+                        renders.renderIndex(res,null,login,`Este artigo é barrado por uma assinatura`);
                         return;
                     }
                 }
