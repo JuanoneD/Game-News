@@ -194,7 +194,7 @@
                 <div class="new-amsterdam-title">Usuarios</div>
                 <div>
                     <form method="post">
-                        <input type="search" name="SearchByNameUser" class="form-control form-control-dark text-bg-dark" placeholder="Pesquisar" aria-label="Search">
+                        <input type="search" name="SearchByNameUser" class="form-control form-control text-bg" placeholder="Pesquisar" aria-label="Search">
                         <input type="submit" hidden>
                     </form>
                 </div>
@@ -221,7 +221,7 @@
                             <td scope="col"><%=all_users[i].createdAt.toLocaleDateString('pt-BR')%></td>
                             <td scope="col"><%=all_users[i].updatedAt.toLocaleDateString('pt-BR')%></td>
                             <td scope="col">
-                                <a data-bs-toggle="modal"  data-bs-target="#ChangeAdm" style="cursor:pointer;" onclick="document.getElementById('ChangeAdmForm').action = 'ChangeAdm/<%=all_users[i].IDUser%>'">📝</a>
+                                <a data-bs-toggle="modal"  data-bs-target="#ChangeAdm" style="cursor:pointer;" onclick="document.getElementById('ChangeAdmForm').action = 'ChangeAdm/<%=all_users[i].IDUser%>';">📝</a>
                             </td>
                         </tr>
                     <%}%>
