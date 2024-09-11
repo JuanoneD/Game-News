@@ -2,6 +2,7 @@ const users = require('../model/user');
 const articles = require('../model/article');
 const fs = require('fs');
 const Comments = require('../model/comment');
+const Likes = require('../model/likes');
 
 module.exports = {
     async registerArticle(req,res){
@@ -110,6 +111,7 @@ module.exports = {
 
         await articles.destroy({where:{IDArticle : id_article}});
         await Comments.destroy({where:{IDArticle : id_article}});
+        await Likes.destroy({where:{IDArticle : id_article}});
         res.redirect('/');
     }
 }
