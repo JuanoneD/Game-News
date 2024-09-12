@@ -67,7 +67,7 @@ module.exports = {
         });
 
         if(login.Admin == 0 || login.IDUser != article.IDUser){
-            res.redirect(`/${id_user}`);
+            res.redirect(`back`);
             return;
         }
 
